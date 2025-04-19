@@ -2,47 +2,26 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <title>Index - Hiver Roleplay</title>
+  <title>Akun Saya - Hiver Roleplay</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    body {
-      font-family: sans-serif;
-      color: white;
+    /* Reset dan gaya dasar */
+    * {
       margin: 0;
       padding: 0;
-      background: url('https://i.imgur.com/pxNqQvK.png') no-repeat center center fixed;
-      background-size: cover;
+      box-sizing: border-box;
     }
-    .sidebar {
-      height: 100%;
-      width: 0;
-      position: fixed;
-      z-index: 1000;
-      top: 0;
-      left: 0;
-      background-color: #111;
-      overflow-x: hidden;
-      transition: 0.3s;
-      padding-top: 60px;
-    }
-    .sidebar a {
-      padding: 10px 25px;
-      text-decoration: none;
-      font-size: 18px;
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #1f1f1f, #2b2b2b);
       color: #fff;
-      display: block;
-      border-bottom: 1px solid #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
-    .sidebar a:hover {
-      background-color: #00ffcc22;
-    }
-    .sidebar .closebtn {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      font-size: 30px;
-      color: #ff5050;
-    }
+
+    /* Navigasi */
     .navbar {
       background: #2b2b2b;
       padding: 15px 20px;
@@ -51,163 +30,150 @@
       align-items: center;
       box-shadow: 0 0 8px #00ffcc66;
     }
-    .menu-icon {
-      font-size: 28px;
-      cursor: pointer;
-      color: #00ffcc;
-    }
-    .logo {
+
+    .navbar .logo {
       height: 45px;
       border-radius: 10px;
       cursor: pointer;
     }
+
+    .navbar .nav-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .navbar .nav-links a {
+      color: #00ffcc;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px;
+    }
+
+    .navbar .nav-links a:hover {
+      background-color: #00ffcc22;
+      border-radius: 5px;
+    }
+
+    /* Konten utama */
     .main {
-      padding: 30px 20px;
+      flex: 1;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       text-align: center;
     }
-    h1 {
-      color: #00ffcc;
-      margin-bottom: 10px;
-    }
-    p, a {
-      color: #ccc;
-    }
-    .menu-btn {
-      display: inline-block;
-      padding: 15px 30px;
-      background: #00ffcc;
-      color: #000;
-      font-weight: bold;
-      border-radius: 12px;
-      text-decoration: none;
-      box-shadow: 0 0 10px #00ffcc80;
-      transition: 0.2s;
-    }
-    .menu-btn:hover {
-      background: #00c2a8;
-    }
-    .flash-sale {
-      background-color: rgba(0, 0, 0, 0.6);
-      margin: 40px auto;
-      padding: 20px;
-      border-radius: 12px;
-      max-width: 600px;
-      box-shadow: 0 0 10px #00ffcc80;
-      animation: fadeIn 1s ease-in-out;
-    }
-    .flash-sale h2 {
-      color: #ff5050;
-      margin-bottom: 15px;
-      animation: blink 1s infinite;
-    }
-    .flash-sale p {
-      color: #ccc;
+
+    .main h1 {
+      font-size: 2.5em;
       margin-bottom: 20px;
+      color: #00ffcc;
     }
-    .flash-sale .menu-btn {
+
+    .main p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+    }
+
+    .user-info {
+      background-color: #333;
+      padding: 20px;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 0 10px #00ffcc80;
+    }
+
+    .user-info p {
+      margin: 10px 0;
+      font-size: 1em;
+    }
+
+    .logout-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
       background: #ff5050;
       color: #fff;
-      animation: pulse 2s infinite;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
     }
-    .flash-sale .menu-btn:hover {
+
+    .logout-btn:hover {
       background: #e60000;
     }
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
+
+    /* Responsif */
+    @media (max-width: 600px) {
+      .main h1 {
+        font-size: 2em;
+      }
+
+      .main p {
+        font-size: 1em;
+      }
     }
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #2b2b2b;
-  padding: 15px 20px;
-  box-shadow: 0 0 8px #00ffcc66;
-}
-
-.navbar-left {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.menu-icon {
-  font-size: 28px;
-  cursor: pointer;
-  color: #00ffcc;
-}
-
-.logo {
-  height: 45px;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.navbar-right {
-  display: flex;
-  align-items: center;
-}
-
-.account-btn {
-  color: #00ffcc;
-  text-decoration: none;
-  font-weight: bold;
-  padding: 10px;
-  border-radius: 5px;
-  transition: background 0.3s;
-}
-
-.account-btn:hover {
-  background-color: #00ffcc22;
-}
-
   </style>
 </head>
 <body>
-  <div id="mySidebar" class="sidebar">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">×</a>
-    <a href="index.html">🏠 Beranda</a>
-    <a href="toko.html">🛒 Toko</a>
-    <a href="kontak.html">📞 Kontak</a>
-    <a href="testimoni.html">📷 Testimoni</a>
-    <a href="join.html">💬 Join Grup</a>
-  </div>
   <div class="navbar">
-  <div class="navbar-left">
-    <span class="menu-icon" onclick="openSidebar()">☰</span>
     <img src="https://i.imgur.com/Mo8gSGN.png" class="logo" onclick="location.href='index.html'" alt="Logo Hiver Roleplay">
-  </div>
-  <div class="navbar-right">
-    <a href="akun.html" class="account-btn">👤 Akun</a>
-  </div>
-</div>
-
-  <div class="main">
-    <h1>Selamat Datang di Hiver Roleplay</h1>
-    <p>Toko resmi pembelian Kit & Pack server Minecraft Hiver RP.</p>
-    <a href="toko.html" class="menu-btn">🛒 Masuk ke Toko</a>
-
-    <div class="flash-sale">
-      <h2>🔥 Flash Sale: Paket Pack Kit Team 1</h2>
-      <p>Paket paling laris! Dapatkan sekarang sebelum kehabisan.</p>
-      <a href="toko.html" class="menu-btn">Beli Sekarang</a>
+    <div class="nav-links">
+      <a href="toko.html">ðŸ›’ Toko</a>
+      <a href="kontak.html">ðŸ“ž Kontak</a>
+      <a href="testimoni.html">ðŸ“· Testimoni</a>
+      <a href="join.html">ðŸ’¬ Join Grup</a>
     </div>
   </div>
+
+  <div class="main">
+    <h1>Profil Akun</h1>
+    <div class="user-info">
+      <p><strong>Nama:</strong> <span id="user-name">Memuat...</span></p>
+      <p><strong>Email:</strong> <span id="user-email">Memuat...</span></p>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+
   <script>
-    function openSidebar() {
-      document.getElementById("mySidebar").style.width = "250px";
-    }
-    function closeSidebar() {
-      document.getElementById("mySidebar").style.width = "0";
+    // Konfigurasi Firebase Anda
+    const firebaseConfig = {
+      apiKey: "AIzaSyDFBMeGLVqWHqG-ipB-IYs9BxnF3QhCeZI",
+      authDomain: "website-hiver.firebaseapp.com",
+      projectId: "website-hiver",
+      storageBucket: "website-hiver.firebasestorage.app",
+      messagingSenderId: "109471454769",
+      appId: "1:109471454769:web:b854b4a5224c6f842ae710"
+    };
+
+    // Inisialisasi Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // Periksa status autentikasi pengguna
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        document.getElementById('user-name').textContent = user.displayName || 'Pengguna';
+        document.getElementById('user-email').textContent = user.email || 'Email tidak tersedia';
+      } else {
+        // Jika tidak ada pengguna yang login, arahkan ke halaman login
+        window.location.href = 'login.html';
+      }
+    });
+
+    // Fungsi logout
+    function logout() {
+      auth.signOut().then(() => {
+        window.location.href = 'index.html';
+      }).catch((error) => {
+        console.error('Terjadi kesalahan saat logout:', error);
+      });
     }
   </script>
 </body>
