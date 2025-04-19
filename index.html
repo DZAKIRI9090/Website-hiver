@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Index - Hiver Roleplay</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: sans-serif;
+      color: white;
+      margin: 0;
+      padding: 0;
+      background: url('https://i.imgur.com/pxNqQvK.png') no-repeat center center fixed;
+      background-size: cover;
+    }
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      background-color: #111;
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+    }
+    .sidebar a {
+      padding: 10px 25px;
+      text-decoration: none;
+      font-size: 18px;
+      color: #fff;
+      display: block;
+      border-bottom: 1px solid #333;
+    }
+    .sidebar a:hover {
+      background-color: #00ffcc22;
+    }
+    .sidebar .closebtn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 30px;
+      color: #ff5050;
+    }
+    .navbar {
+      background: #2b2b2b;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 0 8px #00ffcc66;
+    }
+    .menu-icon {
+      font-size: 28px;
+      cursor: pointer;
+      color: #00ffcc;
+    }
+    .logo {
+      height: 45px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .main {
+      padding: 30px 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #00ffcc;
+      margin-bottom: 10px;
+    }
+    p, a {
+      color: #ccc;
+    }
+    .menu-btn {
+      display: inline-block;
+      padding: 15px 30px;
+      background: #00ffcc;
+      color: #000;
+      font-weight: bold;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 0 10px #00ffcc80;
+      transition: 0.2s;
+    }
+    .menu-btn:hover {
+      background: #00c2a8;
+    }
+    .flash-sale {
+      background-color: rgba(0, 0, 0, 0.6);
+      margin: 40px auto;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 600px;
+      box-shadow: 0 0 10px #00ffcc80;
+    }
+    .flash-sale h2 {
+      color: #ff5050;
+      margin-bottom: 15px;
+    }
+    .flash-sale p {
+      color: #ccc;
+      margin-bottom: 20px;
+    }
+    .flash-sale .menu-btn {
+      background: #ff5050;
+      color: #fff;
+    }
+    .flash-sale .menu-btn:hover {
+      background: #e60000;
+    }
+  </style>
+</head>
+<body>
+  <div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">×</a>
+    <a href="index.html">🏠 Beranda</a>
+    <a href="toko.html">🛒 Toko</a>
+    <a href="kontak.html">📞 Kontak</a>
+    <a href="testimoni.html">📷 Testimoni</a>
+    <a href="join.html">💬 Join Grup</a>
+  </div>
+  <div class="navbar">
+    <span class="menu-icon" onclick="openSidebar()">☰</span>
+    <img src="https://i.imgur.com/Mo8gSGN.png" class="logo" onclick="location.href='index.html'">
+  </div>
+  <div class="main">
+    <h1>Selamat Datang di Hiver Roleplay</h1>
+    <p>Toko resmi pembelian Kit & Pack server Minecraft Hiver RP.</p>
+    <a href="toko.html" class="menu-btn">🛒 Masuk ke Toko</a>
+
+    <div class="flash-sale">
+      <h2>🔥 Flash Sale: Paket Pack Kit Team 1</h2>
+      <p>Paket paling laris! Dapatkan sekarang sebelum kehabisan.</p>
+      <a href="toko.html" class="menu-btn">Beli Sekarang</a>
+    </div>
+  </div>
+  <script>
+    function openSidebar() {
+      document.getElementById("mySidebar").style.width = "250px";
+    }
+    function closeSidebar() {
+      document.getElementById("mySidebar").style.width = "0";
+    }
+  </script>
+</body>
+</html>

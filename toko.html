@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Toko Kit Minecraft</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #1f1f1f;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Sidebar (Geser) */
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      background-color: #111;
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+    }
+
+    .sidebar a {
+      padding: 10px 25px;
+      text-decoration: none;
+      font-size: 18px;
+      color: #fff;
+      display: block;
+      transition: 0.2s;
+      border-bottom: 1px solid #333;
+    }
+
+    .sidebar a:hover {
+      background-color: #00ffcc22;
+    }
+
+    .sidebar .closebtn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 30px;
+      color: #ff5050;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: #2b2b2b;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 0 8px #00ffcc66;
+    }
+
+    .menu-icon {
+      font-size: 28px;
+      cursor: pointer;
+      color: #00ffcc;
+    }
+
+    .logo {
+      height: 45px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    /* Konten Utama */
+    .main {
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #00ffcc;
+    }
+
+    .produk {
+      background: #2b2b2b;
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px #00ffcc55;
+    }
+
+    .produk h2 {
+      margin-top: 0;
+      color: #00ffcc;
+    }
+
+    .harga {
+      font-weight: bold;
+      color: #ffcc00;
+    }
+
+    .deskripsi {
+      margin: 10px 0;
+      white-space: pre-line;
+    }
+
+    .beli-button {
+      background: #00ffcc;
+      color: #000;
+      border: none;
+      padding: 20px;
+      font-size: 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      width: 100%;
+      margin-top: 10px;
+      box-shadow: 0 0 10px #00ffcc80;
+      transition: background 0.3s ease;
+    }
+
+    .beli-button:hover {
+      background: #00c2a8;
+    }
+
+    .beli-button:active {
+      transform: scale(0.97);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">×</a>
+    <a href="index.html">🏠 Beranda</a>
+    <a href="toko.html">🛒 Halaman Toko</a>
+    <a href="kontak.html">📞 Kontak Admin</a>
+    <a href="join.html">💬 Join Grup</a>
+    <a href="testimoni.html">📷 Testimoni</a>
+  </div>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <span class="menu-icon" onclick="openSidebar()">☰</span>
+    <img src="https://i.imgur.com/Mo8gSGN.png" class="logo" onclick="window.location.href='index.html'">
+  </div>
+
+  <!-- Konten -->
+  <div class="main">
+    <h1>Toko Kit Minecraft - Hiver Roleplay</h1>
+    <div id="daftar-produk"></div>
+  </div>
+
+  <script>
+    function openSidebar() {
+      document.getElementById("mySidebar").style.width = "250px";
+    }
+
+    function closeSidebar() {
+      document.getElementById("mySidebar").style.width = "0";
+    }
+
+    const nomorWa = "6281360385083";
+
+    const produk = [
+      {
+        nama: "PAKET PACK KIT TEAM 1",
+        harga: "30K",
+        deskripsi: `5 TOTEM\nARMOR DIAMOND 1SET\nTOOLS DIAMOND\nGOLDEN CARROT 2 STACK`
+      },
+      {
+        nama: "PAKET PACK KIT TEAM 2",
+        harga: "<s>110K</s> 95K",
+        deskripsi: `TOTEM 10\nARMOR DIAMOND 2 SET BOOTS EC\nTOOLS DIAMOND 2 SET (SWORD,PICKAXE EC)\nGOLDEN CARROT 4 ST\nGOLDEN APPLE 5 ST\nBOW FULL EC 2 SET`
+      },
+      {
+        nama: "PAKET PACK KIT BASE",
+        harga: "<s>70K</s> 65K",
+        deskripsi: `BEACON 2\nEGG VILLAGE 2\nDIAMOND BLOCK 2 STACK\nIRON BLOCK 2 ST\n1 SHULKER FULL GOLDEN APPLE`
+      },
+      {
+        nama: "PAKET PACK KIT PERANG 1",
+        harga: "<s>100K</s> 95K",
+        deskripsi: `+5 SKILL FIGHTING\n+5 SKILL ARCHERY\n+5 SKILL DEFENSE\n1 SHULKER FULL POISON STRINGS\nARMOR DIAMOND FULL ENCHANT 2 SET\nSWORD DIAMOND FULL EC 5 SET`
+      },
+      {
+        nama: "PAKET PACK KIT SIAGA PERANG 1",
+        harga: "<s>160K</s> 150K",
+        deskripsi: `+8 FIGHTING\n+8 ARCHERY\n+10 DEFENSE\n+8 FISHING\n1 SHULKER FULL POISON SPEED END STRING\nARMOR NETHERITE FULL EC 2 SET\nSWORD, PICKAXE NETHERITE FULL ENCHANT 5 SET`
+      },
+      {
+        nama: "PAKET PACK KIT BOOK ENCHANT 1",
+        harga: "<s>50K</s> 45K",
+        deskripsi: `MENDING 4\nPROTECT 4\nUNBREAKING 4\nTHORNS 4`
+      },
+      {
+        nama: "PACK KIT STATS 1 (Bonus sampai 7 April)",
+        harga: "<s>70K</s> 65K",
+        deskripsi: `+5 FIGHTING +4\n+5 ARCHER +5\n+5 DEFEND +4\n+5 HEALING +5`
+      },
+      {
+        nama: "PACK KIT STATS 2 (sampai 7 April)",
+        harga: "<s>150K</s> 145K",
+        deskripsi: `+10 FIGHTING +5\n+10 DEFEND +5\n+10 ARCHER +6\n+10 SCOREY +7\n+10 HEALING +5`
+      },
+      {
+        nama: "PACK KIT STATS 3",
+        harga: "220K",
+        deskripsi: `+20 FIGHTING +4\n+20 DEFENSE +4\n+20 ARCHERY +4\n+20 ENCHANTED +5\n+20 HEALING +4\n+20 FORANGING +5`
+      }
+      // Tambah lagi kalau mau
+    ];
+
+    const container = document.getElementById("daftar-produk");
+
+    produk.forEach(item => {
+      const el = document.createElement("div");
+      el.className = "produk";
+      el.innerHTML = `
+        <h2>${item.nama}</h2>
+        <div class="harga">Harga: ${item.harga}</div>
+        <div class="deskripsi">${item.deskripsi}</div>
+        <button class="beli-button" onclick="kirimPesan('${item.nama}', '${item.harga}', \`${item.deskripsi}\`)">Beli Sekarang</button>
+      `;
+      container.appendChild(el);
+    });
+
+    function kirimPesan(nama, harga, deskripsi) {
+      const pesan = `ASSALAMUALAIKUM BANG\nMAU BELI:\n*${nama}*\nHarga: ${harga}\n\nIsi Kit:\n${deskripsi}`;
+      const url = `https://wa.me/${nomorWa}?text=${encodeURIComponent(pesan)}`;
+      window.location.href = url;
+    }
+  </script>
+
+</body>
+</html>
+<style>
+  body {
+    font-family: sans-serif;
+    color: white;
+    margin: 6;
+    padding: 15;
+    background: url('https://i.imgur.com/pxNqQvK.png') no-repeat center center fixed;
+    background-size: cover;
+  }
+</style>
