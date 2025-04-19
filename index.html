@@ -93,10 +93,12 @@
       border-radius: 12px;
       max-width: 600px;
       box-shadow: 0 0 10px #00ffcc80;
+      animation: fadeIn 1s ease-in-out;
     }
     .flash-sale h2 {
       color: #ff5050;
       margin-bottom: 15px;
+      animation: blink 1s infinite;
     }
     .flash-sale p {
       color: #ccc;
@@ -105,9 +107,23 @@
     .flash-sale .menu-btn {
       background: #ff5050;
       color: #fff;
+      animation: pulse 2s infinite;
     }
     .flash-sale .menu-btn:hover {
       background: #e60000;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
