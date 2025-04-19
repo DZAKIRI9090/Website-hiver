@@ -124,16 +124,17 @@
 
     // Login function
     document.getElementById('login-button').addEventListener('click', async () => {
-      const email = document.getElementById('login-email').value;
-      const password = document.getElementById('login-password').value;
-      try {
-        await signInWithEmailAndPassword(auth, email, password);
-        alert('Login berhasil!');
-        // Redirect or additional actions here
-      } catch (error) {
-        alert(error.message);
-      }
-    });
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+    try {
+    await signInWithEmailAndPassword(auth, email, password);
+    alert('Login berhasil!');
+    window.location.href = 'beranda.html'; // Redirect to homepage
+  } catch (error) {
+    alert(error.message);
+  }
+});
+
 
     // Signup function
     document.getElementById('signup-button').addEventListener('click', async () => {
