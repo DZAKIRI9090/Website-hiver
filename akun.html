@@ -73,83 +73,80 @@
       <h2>Masuk</h2>
       <input type="email" id="login-email" placeholder="Email" required />
       <input type="password" id="login-password" placeholder="Password" required />
-      <button onclick="login()">Masuk</button>
-      <p>Belum punya akun? <a href="#" onclick="toggleForms()">Daftar di sini</a></p>
+      <button id="login-button">Masuk</button>
+      <p>Belum punya akun? <a href="#" id="show-signup">Daftar di sini</a></p>
     </div>
 
     <div class="form-container" id="signup-form" style="display: none;">
       <h2>Daftar</h2>
       <input type="email" id="signup-email" placeholder="Email" required />
       <input type="password" id="signup-password" placeholder="Password" required />
-      <button onclick="signup()">Daftar</button>
-      <p>Sudah punya akun? <a href="#" onclick="toggleForms()">Masuk di sini</a></p>
+      <button id="signup-button">Daftar</button>
+      <p>Sudah punya akun? <a href="#" id="show-login">Masuk di sini</a></p>
     </div>
   </div>
 
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/11.6.0/firebase-analytics.js"></script>
+  <script type="module">
+    // Import Firebase modules
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-analytics.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
 
-  <script>
-    // Konfigurasi Firebase Anda
+    // Firebase configuration
     const firebaseConfig = {
-     apiKey: "AIzaSyDFBMeGLVqWHqG-ipB-IYs9BxnF3QhCeZI",
-     authDomain: "website-hiver.firebaseapp.com",
-     projectId: "website-hiver",
-     storageBucket: "website-hiver.firebasestorage.app",
-     messagingSenderId: "109471454769",
-     appId: "1:109471454769:web:b854b4a5224c6f842ae710",
-     measurementId: "G-KTH36P0XKQ"
+      apiKey: "AIzaSyDFBMeGLVqWHqG-ipB-IYs9BxnF3QhCeZI",
+      authDomain: "website-hiver.firebaseapp.com",
+      projectId: "website-hiver",
+      storageBucket: "website-hiver.appspot.com",
+      messagingSenderId: "109471454769",
+      appId: "1:109471454769:web:b854b4a5224c6f842ae710",
+      measurementId: "G-KTH36P0XKQ"
     };
 
-    // Inisialisasi Firebase
+    // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
+    const auth = getAuth(app);
 
-    // Fungsi untuk beralih antara formulir login dan pendaftaran
-    function toggleForms() {
-      const loginForm = document.getElementById('login-form');
-      const signupForm = document.getElementById('signup-form');
-      if (loginForm.style.display === 'none') {
-        loginForm.style.display = 'block';
-        signupForm.style.display = 'none';
-      } else {
-        loginForm.style.display = 'none';
-        signupForm.style.display = 'block';
-      }
-    }
+    // Toggle between login and signup forms
+    const loginForm = document.getElementById('login-form');
+    const signupForm = document.getElementById('signup-form');
+    document.getElementById('show-signup').addEventListener('click', (e) => {
+      e.preventDefault();
+      loginForm.style.display = 'none';
+      signupForm.style.display = 'flex';
+    });
+    document.getElementById('show-login').addEventListener('click', (e) => {
+      e.preventDefault();
+      signupForm.style.display = 'none';
+      loginForm.style.display = 'flex';
+    });
 
-    // Fungsi untuk login
-    function login() {
+    // Login function
+    document.getElementById('login-button').addEventListener('click', async () => {
       const email = document.getElementById('login-email').value;
       const password = document.getElementById('login-password').value;
-      auth.signInWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-          // Login berhasil
-          alert('Login berhasil!');
-          // Redirect atau tindakan lainnya
-        })
-        .catch((error) => {
-          // Tangani error
-          alert(error.message);
-        });
-    }
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        alert('Login berhasil!');
+        // Redirect or additional actions here
+      } catch (error) {
+        alert(error.message);
+      }
+    });
 
-    // Fungsi untuk pendaftaran
-    function signup() {
+    // Signup function
+    document.getElementById('signup-button').addEventListener('click', async () => {
       const email = document.getElementById('signup-email').value;
       const password = document.getElementById('signup-password').value;
-      auth.createUserWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-          // Pendaftaran berhasil
-          alert('Pendaftaran berhasil!');
-          // Redirect atau tindakan lainnya
-        })
-        .catch((error) => {
-          // Tangani error
-          alert(error.message);
-        });
-    }
+      try {
+        await createUserWithEmailAndPassword(auth, email, password);
+        alert('Pendaftaran berhasil!');
+        // Redirect or additional actions here
+      } catch (error) {
+        alert(error.message);
+      }
+    });
   </script>
 </body>
 </html>
