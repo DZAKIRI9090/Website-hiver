@@ -5,26 +5,111 @@
   <title>Join Server - Hiver Roleplay</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    body { background: #1f1f1f; color: white; font-family: sans-serif; margin: 0; padding: 0; }
-    .sidebar { height: 100%; width: 0; position: fixed; z-index: 1000; top: 0; left: 0;
-      background-color: #111; overflow-x: hidden; transition: 0.3s; padding-top: 60px; }
-    .sidebar a { padding: 10px 25px; text-decoration: none; font-size: 18px; color: #fff;
-      display: block; border-bottom: 1px solid #333; }
-    .sidebar a:hover { background-color: #00ffcc22; }
-    .sidebar .closebtn { position: absolute; top: 10px; right: 20px; font-size: 30px; color: #ff5050; }
-    .navbar { background: #2b2b2b; padding: 15px 20px; display: flex; justify-content: space-between;
-      align-items: center; box-shadow: 0 0 8px #00ffcc66; }
-    .menu-icon { font-size: 28px; cursor: pointer; color: #00ffcc; }
-    .logo { height: 45px; border-radius: 10px; cursor: pointer; }
-    .main { padding: 30px 20px; }
-    h1 { color: #00ffcc; text-align: center; }
-    p, li { color: #ccc; }
-    ul { padding-left: 20px; }
-    .menu-btn {
-      display: inline-block; padding: 10px 20px; background: #00ffcc; color: black;
-      border-radius: 8px; text-decoration: none; font-weight: bold; box-shadow: 0 0 5px #00ffccaa;
+    body {
+      font-family: sans-serif;
+      color: white;
+      margin: 0;
+      padding: 0;
+      background: url('https://i.imgur.com/pxNqQvK.png') no-repeat center center fixed;
+      background-size: cover;
     }
-    .menu-btn:hover { background: #00c2a8; }
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      background-color: #111;
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+    }
+    .sidebar a {
+      padding: 10px 25px;
+      text-decoration: none;
+      font-size: 18px;
+      color: #fff;
+      display: block;
+      border-bottom: 1px solid #333;
+    }
+    .sidebar a:hover {
+      background-color: #00ffcc22;
+    }
+    .sidebar .closebtn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 30px;
+      color: #ff5050;
+    }
+    .navbar {
+      background: #2b2b2b;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 0 8px #00ffcc66;
+    }
+    .menu-icon {
+      font-size: 28px;
+      cursor: pointer;
+      color: #00ffcc;
+    }
+    .logo {
+      height: 45px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .main {
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 80vh;
+    }
+    .info-box {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px #00ffcc88, 0 0 25px #00ffcc55 inset;
+      max-width: 500px;
+      width: 90%;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    @keyframes glow {
+      from { box-shadow: 0 0 10px #00ffcc44, 0 0 20px #00ffcc22 inset; }
+      to { box-shadow: 0 0 20px #00ffccbb, 0 0 35px #00ffcc66 inset; }
+    }
+    h1 {
+      color: #00ffcc;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .info-box p {
+      font-size: 16px;
+      margin: 10px 0;
+    }
+    .menu-btn, .copy-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #00ffcc;
+      color: black;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 5px #00ffccaa;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    .menu-btn:hover, .copy-btn:hover {
+      background: #00c2a8;
+    }
+    .copy-btn {
+      margin-left: 10px;
+      font-size: 14px;
+    }
   </style>
 </head>
 <body>
@@ -47,26 +132,26 @@
 
   <!-- Konten -->
   <div class="main">
-    <h1>Info Server Minecraft</h1>
-    <p><strong>🌐 IP:</strong> <span id="ip">Loading...</span></p>
-    <p><strong>📡 Port:</strong> <span id="port">Loading...</span></p>
-    <p><strong>📜 MOTD:</strong> <span id="motd">Loading...</span></p>
-    <p><strong>🧠 Versi:</strong> <span id="versi">Loading...</span></p>
-    <p><strong>👥 Pemain Online:</strong> <span id="online">Loading...</span></p>
-    <ul id="playerlist"></ul>
-
-    <p style="margin-top:20px;"><a href="https://bit.ly/HiverRp" target="_blank" class="menu-btn">💬 Gabung Grup WhatsApp</a></p>
+    <div class="info-box">
+      <h1>Info Server Minecraft</h1>
+      <p><strong>🌐 IP:</strong> <span id="ip">Loading...</span>
+        <button class="copy-btn" onclick="copyIP()">Copy IP</button>
+      </p>
+      <p><strong>📡 Port:</strong> <span id="port">Loading...</span></p>
+      <p><strong>📜 MOTD:</strong> <span id="motd">Loading...</span></p>
+      <p><strong>🧠 Versi:</strong> <span id="versi">Loading...</span></p>
+      <p><strong>👥 Pemain Online:</strong> <span id="online">Loading...</span></p>
+      <a href="https://chat.whatsapp.com/BlFb9ZxwK7kLOjWY5zcmP5" target="_blank" class="menu-btn">💬 Gabung Grup WhatsApp</a>
+    </div>
   </div>
 
   <script>
     function openSidebar() {
       document.getElementById("mySidebar").style.width = "250px";
     }
-
     function closeSidebar() {
       document.getElementById("mySidebar").style.width = "0";
     }
-
     async function getServerStatus() {
       const serverIP = "play.hiver.my.id";
       try {
@@ -79,34 +164,19 @@
         document.getElementById("versi").textContent = data.version || "Tidak tersedia";
         document.getElementById("online").textContent = `${data.players?.online || 0} / ${data.players?.max || 0}`;
 
-        const playerList = document.getElementById("playerlist");
-        playerList.innerHTML = "";
-        if (data.players?.list) {
-          data.players.list.forEach(name => {
-            const li = document.createElement("li");
-            li.textContent = name;
-            playerList.appendChild(li);
-          });
-        } else {
-          playerList.innerHTML = "<li><i>Tidak ada player terlihat</i></li>";
-        }
-
       } catch (err) {
         document.getElementById("motd").textContent = "Gagal mengambil data server.";
       }
+    }
+
+    function copyIP() {
+      const ip = document.getElementById("ip").textContent;
+      navigator.clipboard.writeText(ip).then(() => {
+        alert("✅ IP berhasil disalin ke clipboard!");
+      });
     }
 
     getServerStatus();
   </script>
 </body>
 </html>
-<style>
-  body {
-    font-family: sans-serif;
-    color: white;
-    margin: 6;
-    padding: 15;
-    background: url('https://i.imgur.com/pxNqQvK.png') no-repeat center center fixed;
-    background-size: cover;
-  }
-</style>
