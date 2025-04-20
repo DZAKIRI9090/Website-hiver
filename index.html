@@ -44,12 +44,17 @@
       color: #ff5050;
     }
     .navbar {
-      background: #2b2b2b;
-      padding: 15px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      background: #2b2b2b;
+      padding: 15px 20px;
       box-shadow: 0 0 8px #00ffcc66;
+    }
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
     }
     .menu-icon {
       font-size: 28px;
@@ -60,6 +65,26 @@
       height: 45px;
       border-radius: 10px;
       cursor: pointer;
+    }
+    .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .account-btn {
+      color: #00ffcc;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+    .account-btn:hover {
+      background-color: #00ffcc22;
+    }
+    .user-email {
+      font-size: 14px;
+      color: #ccc;
     }
     .main {
       padding: 30px 20px;
@@ -125,51 +150,6 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #2b2b2b;
-  padding: 15px 20px;
-  box-shadow: 0 0 8px #00ffcc66;
-}
-
-.navbar-left {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.menu-icon {
-  font-size: 28px;
-  cursor: pointer;
-  color: #00ffcc;
-}
-
-.logo {
-  height: 45px;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.navbar-right {
-  display: flex;
-  align-items: center;
-}
-
-.account-btn {
-  color: #00ffcc;
-  text-decoration: none;
-  font-weight: bold;
-  padding: 10px;
-  border-radius: 5px;
-  transition: background 0.3s;
-}
-
-.account-btn:hover {
-  background-color: #00ffcc22;
-}
-
   </style>
 </head>
 <body>
@@ -182,14 +162,15 @@
     <a href="join.html">💬 Join Grup</a>
   </div>
   <div class="navbar">
-  <div class="navbar-left">
-    <span class="menu-icon" onclick="openSidebar()">☰</span>
-    <img src="https://i.imgur.com/Mo8gSGN.png" class="logo" onclick="location.href='index.html'" alt="Logo Hiver Roleplay">
+    <div class="navbar-left">
+      <span class="menu-icon" onclick="openSidebar()">☰</span>
+      <img src="https://i.imgur.com/Mo8gSGN.png" class="logo" onclick="location.href='index.html'" alt="Logo Hiver Roleplay">
+    </div>
+    <div class="navbar-right">
+      <span class="user-email" id="user-email">Akun: -</span>
+      <a href="akun.html" class="account-btn">👤 Akun</a>
+    </div>
   </div>
-  <div class="navbar-right">
-    <a href='akun.html'" class="account-btn">👤 Akun</a>
-  </div>
-</div>
 
   <div class="main">
     <h1>Selamat Datang di Hiver Roleplay</h1>
@@ -202,7 +183,32 @@
       <a href="toko.html" class="menu-btn">Beli Sekarang</a>
     </div>
   </div>
-  <script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDFBMeGLVqWHqG-ipB-IYs9BxnF3QhCeZI",
+      authDomain: "website-hiver.firebaseapp.com",
+      projectId: "website-hiver",
+      storageBucket: "website-hiver.appspot.com",
+      messagingSenderId: "109471454769",
+      appId: "1:109471454769:web:b854b4a5224c6f842ae710"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const userEmailSpan = document.getElementById('user-email');
+    onAuthStateChanged(auth, user => {
+      if (user) {
+        userEmailSpan.textContent = `Akun: ${user.email}`;
+        localStorage.setItem("userEmail", user.email);
+      } else {
+        userEmailSpan.textContent = "Akun: -";
+      }
+    });
+
     function openSidebar() {
       document.getElementById("mySidebar").style.width = "250px";
     }
@@ -210,5 +216,7 @@
       document.getElementById("mySidebar").style.width = "0";
     }
   </script>
+</body>
+</html>
 </body>
 </html>
