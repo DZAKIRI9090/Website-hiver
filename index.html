@@ -61,10 +61,6 @@
       border-radius: 10px;
       cursor: pointer;
     }
-    .user-email {
-      font-size: 14px;
-      color: #ccc;
-    }
     .main {
       padding: 30px 20px;
       text-align: center;
@@ -134,22 +130,29 @@
       align-items: center;
       gap: 10px;
     }
-    .account-btn {
+    .account-btn, .logout-btn {
       color: #00ffcc;
       text-decoration: none;
       font-weight: bold;
       padding: 10px;
       border-radius: 5px;
       transition: background 0.3s;
+      background: transparent;
+      border: none;
+      cursor: pointer;
     }
-    .account-btn:hover {
+    .account-btn:hover, .logout-btn:hover {
       background-color: #00ffcc22;
+    }
+    #user-email {
+      color: #00ffcc;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
-  <div id="mySidebar" class="navbar">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()"></a>
+  <div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">×</a>
     <a href="index.html">🏠 Beranda</a>
     <a href="toko.html">🛒 Toko</a>
     <a href="kontak.html">📞 Kontak</a>
@@ -162,10 +165,10 @@
       <img src="https://i.imgur.com/Mo8gSGN.png" class="logo" onclick="location.href='index.html'" alt="Logo Hiver Roleplay">
     </div>
     <div class="navbar-right">
-      <span class="user-email" id="user-email">Akun: -</span>
+      <span id="user-email"></span>
       <a href="akun.html" class="account-btn">👤 Akun</a>
       <a href="admin.html" class="account-btn" id="adminLink" style="display:none">🛠 Admin</a>
-      <button id="logout-btn" class="account-btn">🚪 Logout</button>
+      <button class="logout-btn" id="logoutBtn" style="display:none">🔓 Logout</button>
     </div>
   </div>
   <div class="main">
@@ -189,7 +192,6 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
 
-
     const firebaseConfig = {
       apiKey: "AIzaSyDFBMeGLVqWHqG-ipB-IYs9BxnF3QhCeZI",
       authDomain: "website-hiver.firebaseapp.com",
@@ -202,28 +204,25 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    const userEmailSpan = document.getElementById('user-email');
-    const logoutBtn = document.getElementById('logout-btn');
-    
-    
+    const adminEmail = "adminhiver@gmail.com";
+
     onAuthStateChanged(auth, user => {
-      if (user && user.email === "adminhiver@gmail.com") {
-        document.getElementById("adminLink").style.display = "inline-block";
-        userEmailSpan.textContent = `Akun: ${user.email}`;
-        localStorage.setItem("userEmail", user.email);
+      const userEmailSpan = document.getElementById("user-email");
+      const logoutBtn = document.getElementById("logoutBtn");
+      if (user) {
+        userEmailSpan.textContent = user.email;
         logoutBtn.style.display = "inline-block";
-      } else {
-        userEmailSpan.textContent = "Akun: -";
-        logoutBtn.style.display = "none";
+        if (user.email === adminEmail) {
+          document.getElementById("adminLink").style.display = "inline-block";
+        }
       }
-      logoutBtn.addEventListener("click", () => {
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
       signOut(auth).then(() => {
         alert("Berhasil logout!");
-        window.location.href = "akun.html";
-      }).catch((error) => {
-        alert("Gagal logout: " + error.message);
+        window.location.reload();
       });
-    });
     });
   </script>
 </body>
