@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard Admin - Hiver RP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #121212;
+      color: #fff;
+    }
+    header {
+      background: #1f1f1f;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.6);
+    }
+    header h1 {
+      color: #00ffcc;
+      margin: 0;
+      font-size: 20px;
+    }
+    header button {
+      background: #ff5050;
+      border: none;
+      padding: 8px 15px;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .content {
+      padding: 20px;
+    }
+    .card {
+      background: #222;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      box-shadow: 0 0 10px #00ffcc40;
+    }
+    .card h2 {
+      margin-bottom: 10px;
+      color: #00ffcc;
+    }
+    .card p {
+      font-size: 18px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #333;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background: #00ffcc33;
+    }
+    .btn {
+      padding: 5px 10px;
+      margin-right: 5px;
+      font-size: 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .edit-btn {
+      background: #00c2ff;
+      color: #fff;
+    }
+    .delete-btn {
+      background: #ff5050;
+      color: #fff;
+    }
+    .back-btn {
+      display: inline-block;
+      margin-bottom: 15px;
+      padding: 8px 16px;
+      background: #00ffcc;
+      color: #000;
+      font-weight: bold;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+    form input {
+      padding: 10px;
+      margin: 5px;
+      border: none;
+      border-radius: 6px;
+      width: calc(50% - 10px);
+    }
+    form button {
+      background: #00ffcc;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📊 Admin Dashboard - Hiver RP</h1>
+    <button onclick="window.location.href='index.html'">← Kembali</button>
+  </header>
+  <div class="content">
+    <a class="back-btn" href="index.html">← Kembali ke Halaman Utama</a>
+
+    <div class="card">
+      <h2>📈 Statistik Pengguna & Pembelian</h2>
+      <canvas id="statsChart" height="100"></canvas>
+    </div>
+
+    <div class="card">
+      <h2>📦 Tambah Produk</h2>
+      <form id="add-product-form">
+        <input type="text" id="produk-nama" placeholder="Nama Produk" required>
+        <input type="text" id="produk-harga" placeholder="Harga" required>
+        <br>
+        <button type="submit">➕ Tambahkan Produk</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>📦 Daftar Produk</h2>
+      <table id="product-table">
+        <thead>
+          <tr><th>Nama</th><th>Harga</th><th>Aksi</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>👥 Total Pengguna</h2>
+      <p id="total-users">Loading...</p>
+    </div>
+
+    <div class="card">
+      <h2>🛒 Total Pembelian</h2>
+      <p id="total-orders">Loading...</p>
+    </div>
+
+    <div class="card">
+      <h2>📜 Log Aktivitas Admin</h2>
+      <ul id="admin-log"></ul>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+    import {
+      getFirestore, collection, getDocs, deleteDoc, doc, addDoc, serverTimestamp, query, orderBy
+    } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDFBMeGLVqWHqG-ipB-IYs9BxnF3QhCeZI",
+      authDomain: "website-hiver.firebaseapp.com",
+      projectId: "website-hiver",
+      storageBucket: "website-hiver.appspot.com",
+      messagingSenderId: "109471454769",
+      appId: "1:109471454769:web:b854b4a5224c6f842ae710"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const adminEmail = "adminhiver@gmail.com";
+
+    let currentAdmin = "";
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user || user.email !== adminEmail) {
+        alert("Akses hanya untuk admin!");
+        window.location.href = "index.html";
+        return;
+      }
+
+      currentAdmin = user.email;
+
+      const userSnap = await getDocs(collection(db, "users"));
+      document.getElementById("total-users").textContent = userSnap.size;
+      const userTable = document.getElementById("user-table").querySelector("tbody");
+      userSnap.forEach(doc => {
+        const row = `<tr><td>${doc.data().email}</td><td>${doc.id}</td></tr>`;
+        userTable.innerHTML += row;
+      });
+
+      const orderSnap = await getDocs(collection(db, "orders"));
+      document.getElementById("total-orders").textContent = orderSnap.size;
+
+      const productSnap = await getDocs(collection(db, "produk"));
+      const productTable = document.getElementById("product-table").querySelector("tbody");
+      productSnap.forEach(docSnap => {
+        const { nama, harga } = docSnap.data();
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${nama}</td>
+          <td>${harga}</td>
+          <td>
+            <button class="btn edit-btn" onclick="alert('Fitur edit belum tersedia')">Edit</button>
+            <button class="btn delete-btn" onclick="hapusProduk('${docSnap.id}', '${nama}')">Hapus</button>
+          </td>`;
+        productTable.appendChild(row);
+      });
+
+      const ctx = document.getElementById("statsChart").getContext("2d");
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Pengguna', 'Pembelian'],
+          datasets: [{
+            label: 'Data Admin',
+            data: [userSnap.size, orderSnap.size],
+            backgroundColor: ['#00ffcc', '#ff5050']
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { display: false } }
+        }
+      });
+
+      // Load logs
+      const logSnap = await getDocs(query(collection(db, "admin_logs"), orderBy("waktu", "desc")));
+      const logList = document.getElementById("admin-log");
+      logSnap.forEach(doc => {
+        const { aksi, produk, admin, waktu } = doc.data();
+        const li = document.createElement("li");
+        li.textContent = `[${new Date(waktu?.toDate()).toLocaleString()}] ${admin} melakukan ${aksi} produk: ${produk}`;
+        logList.appendChild(li);
+      });
+    });
+
+    async function hapusProduk(id, nama) {
+      if (confirm("Yakin ingin menghapus produk ini?")) {
+        await deleteDoc(doc(db, "produk", id));
+        await addDoc(collection(db, "admin_logs"), {
+          aksi: "hapus_produk",
+          produk: nama,
+          admin: currentAdmin,
+          waktu: serverTimestamp()
+        });
+        alert("Produk berhasil dihapus.");
+        location.reload();
+      }
+    }
+
+    const form = document.getElementById("add-product-form");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const nama = document.getElementById("produk-nama").value.trim();
+      const harga = document.getElementById("produk-harga").value.trim();
+
+      if (nama && harga) {
+        await addDoc(collection(db, "produk"), { nama, harga });
+        await addDoc(collection(db, "admin_logs"), {
+          aksi: "tambah_produk",
+          produk: nama,
+          admin: currentAdmin,
+          waktu: serverTimestamp()
+        });
+        alert("Produk berhasil ditambahkan!");
+        location.reload();
+      }
+    });
+  </script>
+</body>
+</html>
