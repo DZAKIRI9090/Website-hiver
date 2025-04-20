@@ -42,6 +42,7 @@
       right: 20px;
       font-size: 30px;
       color: #ff5050;
+      cursor: pointer;
     }
     .navbar {
       display: flex;
@@ -78,6 +79,9 @@
       padding: 10px;
       border-radius: 5px;
       transition: background 0.3s;
+      background: transparent;
+      border: none;
+      cursor: pointer;
     }
     .account-btn:hover {
       background-color: #00ffcc22;
@@ -153,13 +157,13 @@
   </style>
 </head>
 <body>
-  <div id="mySidebar" class="sidebar">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">×</a>
+  <div id="mySidebar" class="navbar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()"></a>
     <a href="index.html">🏠 Beranda</a>
     <a href="toko.html">🛒 Toko</a>
     <a href="kontak.html">📞 Kontak</a>
     <a href="testimoni.html">📷 Testimoni</a>
-    <a href="join.html">💬 Join Grup</a>
+    <a href="join.html">💬 Info server</a>
   </div>
   <div class="navbar">
     <div class="navbar-left">
@@ -169,6 +173,7 @@
     <div class="navbar-right">
       <span class="user-email" id="user-email">Akun: -</span>
       <a href="akun.html" class="account-btn">👤 Akun</a>
+      <button id="logout-btn" class="account-btn">🚪 Logout</button>
     </div>
   </div>
 
@@ -185,7 +190,7 @@
   </div>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyDFBMeGLVqWHqG-ipB-IYs9BxnF3QhCeZI",
@@ -200,13 +205,26 @@
     const auth = getAuth(app);
 
     const userEmailSpan = document.getElementById('user-email');
+    const logoutBtn = document.getElementById('logout-btn');
+
     onAuthStateChanged(auth, user => {
       if (user) {
         userEmailSpan.textContent = `Akun: ${user.email}`;
         localStorage.setItem("userEmail", user.email);
+        logoutBtn.style.display = "inline-block";
       } else {
         userEmailSpan.textContent = "Akun: -";
+        logoutBtn.style.display = "none";
       }
+    });
+
+    logoutBtn.addEventListener("click", () => {
+      signOut(auth).then(() => {
+        alert("Berhasil logout!");
+        window.location.href = "akun.html";
+      }).catch((error) => {
+        alert("Gagal logout: " + error.message);
+      });
     });
 
     function openSidebar() {
@@ -216,7 +234,5 @@
       document.getElementById("mySidebar").style.width = "0";
     }
   </script>
-</body>
-</html>
 </body>
 </html>
