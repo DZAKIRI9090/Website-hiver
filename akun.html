@@ -3,96 +3,233 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Halaman Akun</title>
+  <title>Modern Login - Hiver</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f2f5;
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+    body{
+      background-color: #c9d6ff;
+      background: linear-gradient(to right, #e2e2e2, #c9d6ff);
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      flex-direction: column;
       height: 100vh;
     }
-
-    .container {
-      width: 100%;
-      max-width: 400px;
-      padding: 20px;
-      background-color: #ffffff;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    .container{
+      background-color: #fff;
+      border-radius: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+      position: relative;
+      overflow: hidden;
+      width: 768px;
+      max-width: 100%;
+      min-height: 480px;
     }
-
-    .form-container {
-      display: flex;
-      flex-direction: column;
+    .container p{
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 0.3px;
+      margin: 20px 0;
     }
-
-    .form-container h2 {
-      text-align: center;
-      margin-bottom: 20px;
+    .container span{
+      font-size: 12px;
     }
-
-    .form-container input {
-      padding: 10px;
-      margin: 5px 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+    .container a{
+      color: #333;
+      font-size: 13px;
+      text-decoration: none;
+      margin: 15px 0 10px;
     }
-
-    .form-container button {
-      padding: 10px;
+    .container button{
+      background-color: #512da8;
+      color: #fff;
+      font-size: 12px;
+      padding: 10px 45px;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
       margin-top: 10px;
-      background-color: #00ffcc;
-      border: none;
-      border-radius: 5px;
       cursor: pointer;
     }
-
-    .form-container button:hover {
-      background-color: #00cc99;
+    .container button.hidden{
+      background-color: transparent;
+      border-color: #fff;
     }
-
-    .form-container p {
+    .container form{
+      background-color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 0 40px;
+      height: 100%;
+    }
+    .container input{
+      background-color: #eee;
+      border: none;
+      margin: 8px 0;
+      padding: 10px 15px;
+      font-size: 13px;
+      border-radius: 8px;
+      width: 100%;
+      outline: none;
+    }
+    .form-container{
+      position: absolute;
+      top: 0;
+      height: 100%;
+      transition: all 0.6s ease-in-out;
+    }
+    .sign-in{
+      left: 0;
+      width: 50%;
+      z-index: 2;
+    }
+    .container.active .sign-in{
+      transform: translateX(100%);
+    }
+    .sign-up{
+      left: 0;
+      width: 50%;
+      opacity: 0;
+      z-index: 1;
+    }
+    .container.active .sign-up{
+      transform: translateX(100%);
+      opacity: 1;
+      z-index: 5;
+      animation: move 0.6s;
+    }
+    @keyframes move{
+      0%, 49.99%{
+        opacity: 0;
+        z-index: 1;
+      }
+      50%, 100%{
+        opacity: 1;
+        z-index: 5;
+      }
+    }
+    .social-icons{
+      margin: 20px 0;
+    }
+    .social-icons a{
+      border: 1px solid #ccc;
+      border-radius: 20%;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 3px;
+      width: 40px;
+      height: 40px;
+    }
+    .toggle-container{
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 50%;
+      height: 100%;
+      overflow: hidden;
+      transition: all 0.6s ease-in-out;
+      border-radius: 150px 0 0 100px;
+      z-index: 1000;
+    }
+    .container.active .toggle-container{
+      transform: translateX(-100%);
+      border-radius: 0 150px 100px 0;
+    }
+    .toggle{
+      background-color: #512da8;
+      height: 100%;
+      background: linear-gradient(to right, #5c6bc0, #512da8);
+      color: #fff;
+      position: relative;
+      left: -100%;
+      height: 100%;
+      width: 200%;
+      transform: translateX(0);
+      transition: all 0.6s ease-in-out;
+    }
+    .container.active .toggle{
+      transform: translateX(50%);
+    }
+    .toggle-panel{
+      position: absolute;
+      width: 50%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 0 30px;
       text-align: center;
-      margin-top: 10px;
+      top: 0;
+      transform: translateX(0);
+      transition: all 0.6s ease-in-out;
     }
-
-    .form-container a {
-      color: #00ffcc;
-      text-decoration: none;
+    .toggle-left{
+      transform: translateX(-200%);
     }
-
-    .form-container a:hover {
-      text-decoration: underline;
+    .container.active .toggle-left{
+      transform: translateX(0);
+    }
+    .toggle-right{
+      right: 0;
+      transform: translateX(0);
+    }
+    .container.active .toggle-right{
+      transform: translateX(200%);
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="form-container" id="login-form">
-      <h2>Masuk</h2>
-      <input type="email" id="login-email" placeholder="Email" required />
-      <input type="password" id="login-password" placeholder="Password" required />
-      <button id="login-button">Masuk</button>
-      <p>Belum punya akun? <a href="#" id="show-signup">Daftar di sini</a></p>
+  <div class="container" id="container">
+    <div class="form-container sign-up">
+      <form id="signup-form">
+        <h1>Buat Akun</h1>
+        <input type="email" placeholder="Email" id="signup-email" required />
+        <input type="password" placeholder="Password" id="signup-password" required />
+        <button type="submit">Daftar</button>
+      </form>
     </div>
-
-    <div class="form-container" id="signup-form" style="display: none;">
-      <h2>Daftar</h2>
-      <input type="email" id="signup-email" placeholder="Email" required />
-      <input type="password" id="signup-password" placeholder="Password" required />
-      <button id="signup-button">Daftar</button>
-      <p>Sudah punya akun? <a href="#" id="show-login">Masuk di sini</a></p>
+    <div class="form-container sign-in">
+      <form id="login-form">
+        <h1>Masuk</h1>
+        <input type="email" placeholder="Email" id="login-email" required />
+        <input type="password" placeholder="Password" id="login-password" required />
+        <button type="submit">Masuk</button>
+      </form>
+    </div>
+    <div class="toggle-container">
+      <div class="toggle">
+        <div class="toggle-panel toggle-left">
+          <h1>Selamat Datang Kembali!</h1>
+          <p>Untuk tetap terhubung, silakan masuk dengan informasi pribadi Anda</p>
+          <button class="hidden" id="signIn">Masuk</button>
+        </div>
+        <div class="toggle-panel toggle-right">
+          <h1>Halo, Teman!</h1>
+          <p>Masukkan detail pribadi Anda dan mulai perjalanan bersama kami</p>
+          <button class="hidden" id="signUp">Daftar</button>
+        </div>
+      </div>
     </div>
   </div>
 
   <script type="module">
-    // Import Firebase modules
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-analytics.js";
     import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
 
-    // Firebase configuration
     const firebaseConfig = {
       apiKey: "AIzaSyDFBMeGLVqWHqG-ipB-IYs9BxnF3QhCeZI",
       authDomain: "website-hiver.firebaseapp.com",
@@ -103,47 +240,39 @@
       measurementId: "G-KTH36P0XKQ"
     };
 
-    // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
     const auth = getAuth(app);
 
-    // Toggle between login and signup forms
-    const loginForm = document.getElementById('login-form');
-    const signupForm = document.getElementById('signup-form');
-    document.getElementById('show-signup').addEventListener('click', (e) => {
-      e.preventDefault();
-      loginForm.style.display = 'none';
-      signupForm.style.display = 'flex';
+    const container = document.getElementById('container');
+    document.getElementById('signUp').addEventListener('click', () => {
+      container.classList.add("active");
     });
-    document.getElementById('show-login').addEventListener('click', (e) => {
-      e.preventDefault();
-      signupForm.style.display = 'none';
-      loginForm.style.display = 'flex';
+    document.getElementById('signIn').addEventListener('click', () => {
+      container.classList.remove("active");
     });
 
-    // Login function
-    document.getElementById('login-button').addEventListener('click', async () => {
-    const email = document.getElementById('login-email').value;
-    const password = document.getElementById('login-password').value;
-    try {
-    await signInWithEmailAndPassword(auth, email, password);
-    alert('Login berhasil!');
-    window.location.href = 'index.html'; // Redirect to homepage
-  } catch (error) {
-    alert(error.message);
-  }
-});
-
-
-    // Signup function
-    document.getElementById('signup-button').addEventListener('click', async () => {
+    document.getElementById('signup-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
       const email = document.getElementById('signup-email').value;
       const password = document.getElementById('signup-password').value;
       try {
         await createUserWithEmailAndPassword(auth, email, password);
         alert('Pendaftaran berhasil!');
-        // Redirect or additional actions here
+        container.classList.remove("active");
+      } catch (error) {
+        alert(error.message);
+      }
+    });
+
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        alert('Login berhasil!');
+        window.location.href = 'index.html';
       } catch (error) {
         alert(error.message);
       }
