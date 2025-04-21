@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Toko Kit Minecraft</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
+      background: url('https://i.imgur.com/pxNqQvK.png') no-repeat center center fixed;
+      background-size: cover;
       font-family: Arial, sans-serif;
-      background: #1f1f1f;
-      color: #fff;
       margin: 0;
       padding: 0;
+      color: #fff;
     }
 
-    /* Sidebar (Geser) */
     .sidebar {
       height: 100%;
       width: 0;
@@ -33,7 +33,6 @@
       font-size: 18px;
       color: #fff;
       display: block;
-      transition: 0.2s;
       border-bottom: 1px solid #333;
     }
 
@@ -49,7 +48,6 @@
       color: #ff5050;
     }
 
-    /* Navbar */
     .navbar {
       background: #2b2b2b;
       padding: 15px 20px;
@@ -71,23 +69,43 @@
       cursor: pointer;
     }
 
-    /* Konten Utama */
     .main {
       padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     h1 {
       text-align: center;
       margin-bottom: 30px;
       color: #00ffcc;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .produk-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      max-width: 1200px;
+      width: 100%;
     }
 
     .produk {
-      background: #2b2b2b;
+      background: rgba(0, 0, 0, 0.6);
       padding: 20px;
       border-radius: 15px;
-      margin-bottom: 20px;
-      box-shadow: 0 0 10px #00ffcc55;
+      width: 100%;
+      max-width: 340px;
+      box-shadow: 0 0 12px #00ffcc66;
+      transition: 0.4s ease;
+      animation: fadeIn 0.8s ease;
+    }
+
+    .produk:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px #00ffccaa;
     }
 
     .produk h2 {
@@ -108,24 +126,38 @@
     .beli-button {
       background: #00ffcc;
       color: #000;
+      padding: 12px 24px;
+      font-size: 16px;
       border: none;
-      padding: 20px;
-      font-size: 20px;
-      border-radius: 12px;
+      border-radius: 10px;
       cursor: pointer;
       font-weight: bold;
-      width: 100%;
-      margin-top: 10px;
+      display: block;
+      margin: 15px auto 0;
       box-shadow: 0 0 10px #00ffcc80;
-      transition: background 0.3s ease;
+      transition: 0.3s ease;
+      animation: pulse 2s infinite;
     }
 
     .beli-button:hover {
       background: #00c2a8;
     }
 
-    .beli-button:active {
-      transform: scale(0.97);
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    @media (max-width: 768px) {
+      .produk {
+        max-width: 90%;
+      }
     }
   </style>
 </head>
@@ -135,22 +167,22 @@
   <div id="mySidebar" class="sidebar">
     <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">×</a>
     <a href="index.html">🏠 Beranda</a>
-    <a href="toko.html">🛒 Halaman Toko</a>
-    <a href="kontak.html">📞 Kontak Admin</a>
-    <a href="join.html">💬 Join Grup</a>
+    <a href="toko.html">🛒 Toko</a>
+    <a href="kontak.html">📞 Kontak</a>
     <a href="testimoni.html">📷 Testimoni</a>
+    <a href="join.html">💬 Join Grup</a>
   </div>
 
   <!-- Navbar -->
   <div class="navbar">
     <span class="menu-icon" onclick="openSidebar()">☰</span>
-    <img src="https://i.imgur.com/Mo8gSGN.png" class="logo" onclick="window.location.href='index.html'">
+    <img src="https://i.imgur.com/Mo8gSGN.png" class="logo" onclick="window.location.href='index.html'" />
   </div>
 
   <!-- Konten -->
   <div class="main">
-    <h1>Toko Kit Minecraft - Hiver Roleplay</h1>
-    <div id="daftar-produk"></div>
+    <h1>Toko Kit Minecraft - Hiver RP</h1>
+    <div id="daftar-produk" class="produk-grid"></div>
   </div>
 
   <script>
@@ -163,54 +195,16 @@
     }
 
     const nomorWa = "6281360385083";
-
     const produk = [
-      {
-        nama: "PAKET PACK KIT TEAM 1",
-        harga: "30K",
-        deskripsi: `5 TOTEM\nARMOR DIAMOND 1SET\nTOOLS DIAMOND\nGOLDEN CARROT 2 STACK`
-      },
-      {
-        nama: "PAKET PACK KIT TEAM 2",
-        harga: "<s>110K</s> 95K",
-        deskripsi: `TOTEM 10\nARMOR DIAMOND 2 SET BOOTS EC\nTOOLS DIAMOND 2 SET (SWORD,PICKAXE EC)\nGOLDEN CARROT 4 ST\nGOLDEN APPLE 5 ST\nBOW FULL EC 2 SET`
-      },
-      {
-        nama: "PAKET PACK KIT BASE",
-        harga: "<s>70K</s> 65K",
-        deskripsi: `BEACON 2\nEGG VILLAGE 2\nDIAMOND BLOCK 2 STACK\nIRON BLOCK 2 ST\n1 SHULKER FULL GOLDEN APPLE`
-      },
-      {
-        nama: "PAKET PACK KIT PERANG 1",
-        harga: "<s>100K</s> 95K",
-        deskripsi: `+5 SKILL FIGHTING\n+5 SKILL ARCHERY\n+5 SKILL DEFENSE\n1 SHULKER FULL POISON STRINGS\nARMOR DIAMOND FULL ENCHANT 2 SET\nSWORD DIAMOND FULL EC 5 SET`
-      },
-      {
-        nama: "PAKET PACK KIT SIAGA PERANG 1",
-        harga: "<s>160K</s> 150K",
-        deskripsi: `+8 FIGHTING\n+8 ARCHERY\n+10 DEFENSE\n+8 FISHING\n1 SHULKER FULL POISON SPEED END STRING\nARMOR NETHERITE FULL EC 2 SET\nSWORD, PICKAXE NETHERITE FULL ENCHANT 5 SET`
-      },
-      {
-        nama: "PAKET PACK KIT BOOK ENCHANT 1",
-        harga: "<s>50K</s> 45K",
-        deskripsi: `MENDING 4\nPROTECT 4\nUNBREAKING 4\nTHORNS 4`
-      },
-      {
-        nama: "PACK KIT STATS 1 (Bonus sampai 7 April)",
-        harga: "<s>70K</s> 65K",
-        deskripsi: `+5 FIGHTING +4\n+5 ARCHER +5\n+5 DEFEND +4\n+5 HEALING +5`
-      },
-      {
-        nama: "PACK KIT STATS 2 (sampai 7 April)",
-        harga: "<s>150K</s> 145K",
-        deskripsi: `+10 FIGHTING +5\n+10 DEFEND +5\n+10 ARCHER +6\n+10 SCOREY +7\n+10 HEALING +5`
-      },
-      {
-        nama: "PACK KIT STATS 3",
-        harga: "220K",
-        deskripsi: `+20 FIGHTING +4\n+20 DEFENSE +4\n+20 ARCHERY +4\n+20 ENCHANTED +5\n+20 HEALING +4\n+20 FORANGING +5`
-      }
-      // Tambah lagi kalau mau
+      { nama: "PAKET PACK KIT TEAM 1", harga: "30K", deskripsi: `5 TOTEM\nARMOR DIAMOND 1SET\nTOOLS DIAMOND\nGOLDEN CARROT 2 STACK` },
+      { nama: "PAKET PACK KIT TEAM 2", harga: "<s>110K</s> 95K", deskripsi: `TOTEM 10\nARMOR DIAMOND 2 SET BOOTS EC\nTOOLS DIAMOND 2 SET (SWORD,PICKAXE EC)\nGOLDEN CARROT 4 ST\nGOLDEN APPLE 5 ST\nBOW FULL EC 2 SET` },
+      { nama: "PAKET PACK KIT BASE", harga: "<s>70K</s> 65K", deskripsi: `BEACON 2\nEGG VILLAGE 2\nDIAMOND BLOCK 2 STACK\nIRON BLOCK 2 ST\n1 SHULKER FULL GOLDEN APPLE` },
+      { nama: "PAKET PACK KIT PERANG 1", harga: "<s>100K</s> 95K", deskripsi: `+5 SKILL FIGHTING\n+5 SKILL ARCHERY\n+5 SKILL DEFENSE\n1 SHULKER FULL POISON STRINGS\nARMOR DIAMOND FULL ENCHANT 2 SET\nSWORD DIAMOND FULL EC 5 SET` },
+      { nama: "PAKET PACK KIT SIAGA PERANG 1", harga: "<s>160K</s> 150K", deskripsi: `+8 FIGHTING\n+8 ARCHERY\n+10 DEFENSE\n+8 FISHING\n1 SHULKER FULL POISON SPEED END STRING\nARMOR NETHERITE FULL EC 2 SET\nSWORD, PICKAXE NETHERITE FULL ENCHANT 5 SET` },
+      { nama: "PAKET PACK KIT BOOK ENCHANT 1", harga: "<s>50K</s> 45K", deskripsi: `MENDING 4\nPROTECT 4\nUNBREAKING 4\nTHORNS 4` },
+      { nama: "PACK KIT STATS 1 (Bonus sampai 7 April)", harga: "<s>70K</s> 65K", deskripsi: `+5 FIGHTING +4\n+5 ARCHER +5\n+5 DEFEND +4\n+5 HEALING +5` },
+      { nama: "PACK KIT STATS 2 (sampai 7 April)", harga: "<s>150K</s> 145K", deskripsi: `+10 FIGHTING +5\n+10 DEFEND +5\n+10 ARCHER +6\n+10 SCOREY +7\n+10 HEALING +5` },
+      { nama: "PACK KIT STATS 3", harga: "220K", deskripsi: `+20 FIGHTING +4\n+20 DEFENSE +4\n+20 ARCHERY +4\n+20 ENCHANTED +5\n+20 HEALING +4\n+20 FORANGING +5` }
     ];
 
     const container = document.getElementById("daftar-produk");
@@ -236,13 +230,3 @@
 
 </body>
 </html>
-<style>
-  body {
-    font-family: sans-serif;
-    color: white;
-    margin: 6;
-    padding: 15;
-    background: url('https://i.imgur.com/pxNqQvK.png') no-repeat center center fixed;
-    background-size: cover;
-  }
-</style>
