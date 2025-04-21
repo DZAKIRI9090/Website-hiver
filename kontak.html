@@ -13,6 +13,7 @@
       margin: 0;
       padding: 0;
     }
+
     .sidebar {
       height: 100%;
       width: 0;
@@ -25,6 +26,7 @@
       transition: 0.3s;
       padding-top: 60px;
     }
+
     .sidebar a {
       padding: 10px 25px;
       text-decoration: none;
@@ -33,9 +35,11 @@
       display: block;
       border-bottom: 1px solid #333;
     }
+
     .sidebar a:hover {
       background-color: #00ffcc22;
     }
+
     .sidebar .closebtn {
       position: absolute;
       top: 10px;
@@ -43,6 +47,7 @@
       font-size: 30px;
       color: #ff5050;
     }
+
     .navbar {
       background: #2b2b2b;
       padding: 15px 20px;
@@ -51,58 +56,99 @@
       align-items: center;
       box-shadow: 0 0 8px #00ffcc66;
     }
+
     .menu-icon {
       font-size: 28px;
       cursor: pointer;
       color: #00ffcc;
     }
+
     .logo {
       height: 45px;
       border-radius: 10px;
       cursor: pointer;
     }
+
     .main {
-      padding: 30px 20px;
-      text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 20px;
+      padding: 30px 20px;
+      gap: 30px;
+      animation: fadeIn 1s ease;
     }
-    h1, h2 {
-      color: #00ffcc;
-      margin-bottom: 10px;
+
+    .row {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
-    p, a {
-      color: #ccc;
-      font-size: 15px;
-    }
+
     .kotak {
       background-color: rgba(0, 0, 0, 0.6);
       padding: 25px;
       border-radius: 15px;
-      width: 90%;
-      max-width: 500px;
-      box-shadow: 0 0 10px #00ffcc66;
+      width: 100%;
+      max-width: 350px;
+      box-shadow: 0 0 12px #00ffcc66;
+      transition: all 0.4s ease;
     }
+
+    .kotak:hover {
+      box-shadow: 0 0 20px #00ffccaa;
+      transform: translateY(-5px);
+    }
+
+    h1, h2 {
+      color: #00ffcc;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    p, a {
+      color: #ccc;
+      font-size: 15px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
     .menu-btn {
-      display: inline-block;
+      display: block;
+      width: fit-content;
+      margin: 15px auto 0;
       padding: 15px 30px;
       background: #00ffcc;
       color: #000;
       font-weight: bold;
       border-radius: 12px;
       text-decoration: none;
-      box-shadow: 0 0 10px #00ffcc80;
-      transition: 0.2s;
-      margin-top: 10px;
+      box-shadow: 0 0 15px #00ffcc80;
+      transition: all 0.3s ease;
     }
+
     .menu-btn:hover {
       background: #00c2a8;
+      box-shadow: 0 0 20px #00ffcc;
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .row {
+        flex-direction: column;
+        align-items: center;
+      }
     }
   </style>
 </head>
 <body>
+
+  <!-- Sidebar -->
   <div id="mySidebar" class="sidebar">
     <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">×</a>
     <a href="index.html">🏠 Beranda</a>
@@ -111,36 +157,47 @@
     <a href="testimoni.html">📷 Testimoni</a>
     <a href="join.html">💬 Join Grup</a>
   </div>
+
+  <!-- Navbar -->
   <div class="navbar">
     <span class="menu-icon" onclick="openSidebar()">☰</span>
     <img src="https://i.imgur.com/Mo8gSGN.png" class="logo" onclick="location.href='index.html'">
   </div>
 
+  <!-- Konten -->
   <div class="main">
-    <div class="kotak">
+
+    <div class="row">
+      <div class="kotak">
+        <h2>👥 Grup WhatsApp</h2>
+        <p>Masuk ke grup WhatsApp Hiver Roleplay untuk info, update, dan komunitas.</p>
+        <a class="menu-btn" href="https://chat.whatsapp.com/BlFb9ZxwK7kLOjWY5zcmP5" target="_blank">Gabung Grup WhatsApp</a>
+      </div>
+
+      <div class="kotak">
+        <h2>💬 Discord Server</h2>
+        <p>Bergabunglah dengan komunitas Discord kami untuk info terbaru dan diskusi server.</p>
+        <a class="menu-btn" href="https://discord.gg/sUXPB4dwrM" target="_blank">Gabung Discord</a>
+      </div>
+    </div>
+
+    <div class="kotak" style="margin-top: 20px;">
       <h1>📞 Kontak Langsung</h1>
-      <p>WhatsApp Owner: <a href="https://wa.me/6281360385083">Klik di sini</a></p>
-      <p>WhatsApp Admin: <a href="https://wa.me/6283159684674">Klik di sini</a></p>
+      <p>WhatsApp Owner:<br><a href="https://wa.me/6281360385083">Klik di sini</a></p>
+      <p>WhatsApp Admin:<br><a href="https://wa.me/6283159684674">Klik di sini</a></p>
       <p>Email: hiverroleplay@gmail.com</p>
       <p>Instagram: @HiverRp</p>
     </div>
 
-    <div class="kotak">
-      <h2>💬 Discord Server</h2>
-      <p>Bergabunglah dengan komunitas Discord kami untuk info terbaru dan diskusi server.</p>
-      <a class="menu-btn" href="https://discord.gg/sUXPB4dwrM" target="_blank">Gabung Discord</a>
-    </div>
-
-    <div class="kotak">
-      <h2>👥 Grup WhatsApp</h2>
-      <p>Masuk ke grup WhatsApp Hiver Roleplay untuk info, update, dan komunitas.</p>
-      <a class="menu-btn" href="https://chat.whatsapp.com/BlFb9ZxwK7kLOjWY5zcmP5" target="_blank">Gabung Grup WhatsApp</a>
-    </div>
   </div>
 
   <script>
-    function openSidebar() { document.getElementById("mySidebar").style.width = "250px"; }
-    function closeSidebar() { document.getElementById("mySidebar").style.width = "0"; }
+    function openSidebar() {
+      document.getElementById("mySidebar").style.width = "250px";
+    }
+    function closeSidebar() {
+      document.getElementById("mySidebar").style.width = "0";
+    }
   </script>
 </body>
 </html>
