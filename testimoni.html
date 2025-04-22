@@ -5,59 +5,153 @@
   <title>Testimoni - Hiver Roleplay</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    body { background: #1f1f1f; color: white; font-family: sans-serif; margin: 0; padding: 0; }
-    .sidebar { height: 100%; width: 0; position: fixed; z-index: 1000; top: 0; left: 0;
-      background-color: #111; overflow-x: hidden; transition: 0.3s; padding-top: 60px; }
-    .sidebar a { padding: 10px 25px; text-decoration: none; font-size: 18px; color: #fff;
-      display: block; border-bottom: 1px solid #333; }
-    .sidebar a:hover { background-color: #00ffcc22; }
-    .sidebar .closebtn { position: absolute; top: 10px; right: 20px; font-size: 30px; color: #ff5050; }
-    .navbar { background: #2b2b2b; padding: 15px 20px; display: flex; justify-content: space-between;
-      align-items: center; box-shadow: 0 0 8px #00ffcc66; }
-    .menu-icon { font-size: 28px; cursor: pointer; color: #00ffcc; }
-    .logo { height: 45px; border-radius: 10px; cursor: pointer; }
-    .main { padding: 30px 20px; text-align: center; }
-    h1 { color: #00ffcc; margin-bottom: 10px; }
-    p, a { color: #ccc; }
-    .menu-btn {
-      display: inline-block; padding: 15px 30px; background: #00ffcc; color: #000;
-      font-weight: bold; border-radius: 12px; text-decoration: none;
-      box-shadow: 0 0 10px #00ffcc80; transition: 0.2s;
+    body {
+      background: url('https://i.imgur.com/pxNqQvK.png') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
     }
-    .menu-btn:hover { background: #00c2a8; }
+
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      background-color: #111;
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+    }
+    .sidebar a {
+      padding: 10px 25px;
+      text-decoration: none;
+      font-size: 18px;
+      color: #fff;
+      display: block;
+      border-bottom: 1px solid #333;
+    }
+    .sidebar a:hover {
+      background-color: #ff800020;
+    }
+    .sidebar .closebtn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 30px;
+      color: #ff5050;
+    }
+
+    .navbar {
+      background: #1b1b1b;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 0 10px #ff800080;
+    }
+    .menu-icon {
+      font-size: 28px;
+      cursor: pointer;
+      color: #ff8000;
+    }
+    .logo {
+      height: 45px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .main {
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #ff8000;
+      margin-bottom: 15px;
+    }
+
+    p, a {
+      color: #ccc;
+      font-size: 16px;
+    }
+
+    .btn-container {
+      margin-top: 40px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .menu-btn {
+      display: inline-block;
+      padding: 14px 28px;
+      background: #ff8000;
+      color: black;
+      font-weight: bold;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 0 12px #ff800080;
+      transition: all 0.3s ease;
+    }
+
+    .menu-btn:hover {
+      background: #e67300;
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #ff8000cc;
+    }
+
+    @media (max-width: 600px) {
+      .menu-btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
   </style>
 </head>
 <body>
+
+  <!-- Sidebar -->
   <div id="mySidebar" class="sidebar">
     <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">×</a>
-    
-<a href="index.html">🏠 Beranda</a>
-<a href="toko.html">🛒 Toko</a>
-<a href="kontak.html">📞 Kontak</a>
-<a href="testimoni.html">📷 Testimoni</a>
-<a href="join.html">💬 Join Grup</a>
-
+    <a href="index.html">🏠 Beranda</a>
+    <a href="toko.html">🛒 Toko</a>
+    <a href="kontak.html">📞 Kontak</a>
+    <a href="testimoni.html">📷 Testimoni</a>
+    <a href="join.html">💬 Join Grup</a>
   </div>
+
+  <!-- Navbar -->
   <div class="navbar">
     <span class="menu-icon" onclick="openSidebar()">☰</span>
     <img src="https://i.imgur.com/Mo8gSGN.png" class="logo" onclick="location.href='index.html'">
   </div>
+
+  <!-- Konten -->
   <div class="main">
-    <h1>Testimoni Pembeli</h1><p>📷 Testimoni akan ditambahkan di sini secara berkala!</p><p>Kamu bisa kirim testimoni via WhatsApp ke admin.</p>
+    <h1>📷 Testimoni Pembeli</h1>
+    <p>Testimoni akan ditambahkan di sini secara berkala.</p>
+    <p>Kamu bisa kirim testimoni via WhatsApp ke admin.</p>
+
+    <div class="btn-container">
+      <a href="https://chat.whatsapp.com/BlFb9ZxwK7kLOjWY5zcmP5" target="_blank" class="menu-btn">💬 Gabung Grup WhatsApp</a>
+      <a href="https://discord.gg/sUXPB4dwrM" target="_blank" class="menu-btn">💬 Gabung Discord</a>
+    </div>
   </div>
+
+  <!-- Script -->
   <script>
-    function openSidebar() { document.getElementById("mySidebar").style.width = "250px"; }
-    function closeSidebar() { document.getElementById("mySidebar").style.width = "0"; }
+    function openSidebar() {
+      document.getElementById("mySidebar").style.width = "250px";
+    }
+    function closeSidebar() {
+      document.getElementById("mySidebar").style.width = "0";
+    }
   </script>
+
 </body>
 </html>
-<style>
-  body {
-    font-family: sans-serif;
-    color: white;
-    margin: 6;
-    padding: 15;
-    background: url('https://i.imgur.com/pxNqQvK.png') no-repeat center center fixed;
-    background-size: cover;
-  }
-</style>
