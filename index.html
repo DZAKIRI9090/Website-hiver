@@ -7,12 +7,13 @@
   <style>
     body {
       font-family: sans-serif;
-      color: white;
+      color: #fff;
       margin: 0;
       padding: 0;
       background: url('https://i.imgur.com/pxNqQvK.png') no-repeat center center fixed;
       background-size: cover;
     }
+
     .sidebar {
       height: 100%;
       width: 0;
@@ -25,6 +26,7 @@
       transition: 0.3s;
       padding-top: 60px;
     }
+
     .sidebar a {
       padding: 10px 25px;
       text-decoration: none;
@@ -33,9 +35,11 @@
       display: block;
       border-bottom: 1px solid #333;
     }
+
     .sidebar a:hover {
-      background-color: #00ffcc22;
+      background-color: #ff980022;
     }
+
     .sidebar .closebtn {
       position: absolute;
       top: 10px;
@@ -43,95 +47,113 @@
       font-size: 30px;
       color: #ff5050;
     }
+
     .navbar {
-      background: #2b2b2b;
+      background: #1f1f1f;
       padding: 15px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 0 8px #00ffcc66;
+      box-shadow: 0 0 8px #ff9800aa;
     }
+
     .menu-icon {
       font-size: 28px;
       cursor: pointer;
-      color: #00ffcc;
+      color: #ff9800;
     }
+
     .logo {
       height: 45px;
       border-radius: 10px;
       cursor: pointer;
     }
+
     .main {
       padding: 30px 20px;
       text-align: center;
     }
+
     h1 {
-      color: #00ffcc;
+      color: #ff9800;
       margin-bottom: 10px;
     }
+
     p, a {
-      color: #ccc;
+      color: #ddd;
     }
+
     .menu-btn {
       display: inline-block;
       padding: 15px 30px;
-      background: #00ffcc;
+      background: #ff9800;
       color: #000;
       font-weight: bold;
       border-radius: 12px;
       text-decoration: none;
-      box-shadow: 0 0 10px #00ffcc80;
+      box-shadow: 0 0 10px #ff980080;
       transition: 0.2s;
     }
+
     .menu-btn:hover {
-      background: #00c2a8;
+      background: #e67e00;
     }
+
     .flash-sale {
       background-color: rgba(0, 0, 0, 0.6);
       margin: 40px auto;
       padding: 20px;
       border-radius: 12px;
       max-width: 600px;
-      box-shadow: 0 0 10px #00ffcc80;
+      box-shadow: 0 0 10px #ff980080;
       animation: fadeIn 1s ease-in-out;
     }
+
     .flash-sale h2 {
       color: #ff5050;
       margin-bottom: 15px;
       animation: blink 1s infinite;
     }
+
     .flash-sale p {
       color: #ccc;
       margin-bottom: 20px;
     }
+
     .flash-sale .menu-btn {
       background: #ff5050;
       color: #fff;
       animation: pulse 2s infinite;
     }
+
     .flash-sale .menu-btn:hover {
       background: #e60000;
     }
+
     @keyframes blink {
       0%, 100% { opacity: 1; }
       50% { opacity: 0; }
     }
+
     @keyframes pulse {
       0% { transform: scale(1); }
       50% { transform: scale(1.05); }
       100% { transform: scale(1); }
     }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
     .navbar-right {
       display: flex;
       align-items: center;
       gap: 10px;
     }
+
     .account-btn, .logout-btn {
-      color: #00ffcc;
+      color: #ff9800;
       text-decoration: none;
       font-weight: bold;
       padding: 10px;
@@ -141,11 +163,13 @@
       border: none;
       cursor: pointer;
     }
+
     .account-btn:hover, .logout-btn:hover {
-      background-color: #00ffcc22;
+      background-color: #ff980022;
     }
+
     #user-email {
-      color: #00ffcc;
+      color: #ffcc80;
       font-size: 14px;
     }
   </style>
@@ -159,6 +183,7 @@
     <a href="testimoni.html">📷 Testimoni</a>
     <a href="join.html">💬 Join Grup</a>
   </div>
+
   <div class="navbar">
     <div class="navbar-left">
       <span class="menu-icon" onclick="openSidebar()">☰</span>
@@ -171,64 +196,65 @@
       <button class="logout-btn" id="logoutBtn" style="display:none">🔓 Logout</button>
     </div>
   </div>
+
   <div class="main">
     <h1>Selamat Datang di Hiver Roleplay</h1>
     <p>Toko resmi pembelian Kit & Pack server Minecraft Hiver RP.</p>
     <a href="toko.html" class="menu-btn">🛒 Masuk ke Toko</a>
+
     <div class="flash-sale">
       <h2>🔥 Flash Sale: Paket Pack Kit Team 1</h2>
       <p>Paket paling laris! Dapatkan sekarang sebelum kehabisan.</p>
       <a href="toko.html" class="menu-btn">Beli Sekarang</a>
     </div>
   </div>
+
   <script type="module">
-  function openSidebar() {
-    document.getElementById("mySidebar").style.width = "250px";
-  }
-  function closeSidebar() {
-    document.getElementById("mySidebar").style.width = "0";
-  }
-
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyDFBMeGLVqWHqG-ipB-IYs9BxnF3QhCeZI",
-    authDomain: "website-hiver.firebaseapp.com",
-    projectId: "website-hiver",
-    storageBucket: "website-hiver.appspot.com",
-    messagingSenderId: "109471454769",
-    appId: "1:109471454769:web:b854b4a5224c6f842ae710"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const adminEmail = "adminhiver@gmail.com";
-
-  onAuthStateChanged(auth, user => {
-    if (!user) {
-      // Kalau belum login, langsung redirect ke akun.html
-      window.location.href = "akun.html";
-      return;
+    function openSidebar() {
+      document.getElementById("mySidebar").style.width = "250px";
+    }
+    function closeSidebar() {
+      document.getElementById("mySidebar").style.width = "0";
     }
 
-    // Kalau sudah login, tampilkan email dan tombol
-    const userEmailSpan = document.getElementById("user-email");
-    const logoutBtn = document.getElementById("logoutBtn");
-    userEmailSpan.textContent = user.email;
-    logoutBtn.style.display = "inline-block";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
 
-    if (user.email === adminEmail) {
-      document.getElementById("adminLink").style.display = "inline-block";
-    }
-  });
+    const firebaseConfig = {
+      apiKey: "AIzaSyDFBMeGLVqWHqG-ipB-IYs9BxnF3QhCeZI",
+      authDomain: "website-hiver.firebaseapp.com",
+      projectId: "website-hiver",
+      storageBucket: "website-hiver.appspot.com",
+      messagingSenderId: "109471454769",
+      appId: "1:109471454769:web:b854b4a5224c6f842ae710"
+    };
 
-  document.getElementById("logoutBtn").addEventListener("click", () => {
-    signOut(auth).then(() => {
-      alert("Berhasil logout!");
-      window.location.reload();
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const adminEmail = "adminhiver@gmail.com";
+
+    onAuthStateChanged(auth, user => {
+      if (!user) {
+        window.location.href = "akun.html";
+        return;
+      }
+
+      const userEmailSpan = document.getElementById("user-email");
+      const logoutBtn = document.getElementById("logoutBtn");
+      userEmailSpan.textContent = user.email;
+      logoutBtn.style.display = "inline-block";
+
+      if (user.email === adminEmail) {
+        document.getElementById("adminLink").style.display = "inline-block";
+      }
     });
-  });
-</script>
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      signOut(auth).then(() => {
+        alert("Berhasil logout!");
+        window.location.reload();
+      });
+    });
+  </script>
 </body>
 </html>
