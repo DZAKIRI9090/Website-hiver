@@ -6,13 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
-      font-family: sans-serif;
-      color: white;
-      margin: 0;
-      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
       background: url('https://i.imgur.com/pxNqQvK.png') no-repeat center center fixed;
       background-size: cover;
+      margin: 0;
+      padding: 0;
+      color: #fff;
     }
+
+    /* Sidebar */
     .sidebar {
       height: 100%;
       width: 0;
@@ -34,7 +36,7 @@
       border-bottom: 1px solid #333;
     }
     .sidebar a:hover {
-      background-color: #00ffcc22;
+      background-color: #ff800020;
     }
     .sidebar .closebtn {
       position: absolute;
@@ -43,72 +45,88 @@
       font-size: 30px;
       color: #ff5050;
     }
+
+    /* Navbar */
     .navbar {
-      background: #2b2b2b;
+      background: #1b1b1b;
       padding: 15px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 0 8px #00ffcc66;
+      box-shadow: 0 0 10px #ff800080;
     }
     .menu-icon {
       font-size: 28px;
       cursor: pointer;
-      color: #00ffcc;
+      color: #ff8000;
     }
     .logo {
       height: 45px;
       border-radius: 10px;
       cursor: pointer;
     }
+
+    /* Konten Utama */
     .main {
-      padding: 30px 20px;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       min-height: 80vh;
+      padding: 30px 20px;
     }
+
     .info-box {
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.7);
       padding: 30px;
       border-radius: 15px;
-      box-shadow: 0 0 15px #00ffcc88, 0 0 25px #00ffcc55 inset;
       max-width: 500px;
-      width: 90%;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 0 15px #ff800080;
       animation: glow 2s ease-in-out infinite alternate;
     }
+
     @keyframes glow {
-      from { box-shadow: 0 0 10px #00ffcc44, 0 0 20px #00ffcc22 inset; }
-      to { box-shadow: 0 0 20px #00ffccbb, 0 0 35px #00ffcc66 inset; }
+      from { box-shadow: 0 0 10px #ff800044, 0 0 20px #ff800022 inset; }
+      to { box-shadow: 0 0 20px #ff8000bb, 0 0 35px #ff800066 inset; }
     }
+
     h1 {
-      color: #00ffcc;
-      text-align: center;
+      color: #ff8000;
       margin-bottom: 20px;
     }
+
     .info-box p {
       font-size: 16px;
-      margin: 10px 0;
+      margin: 12px 0;
     }
+
     .menu-btn, .copy-btn {
       display: inline-block;
       padding: 10px 20px;
-      background: #00ffcc;
+      background: #ff8000;
       color: black;
       border-radius: 8px;
       text-decoration: none;
       font-weight: bold;
-      box-shadow: 0 0 5px #00ffccaa;
-      margin-top: 20px;
+      box-shadow: 0 0 10px #ff800080;
+      margin-top: 15px;
       cursor: pointer;
+      transition: 0.3s ease;
     }
     .menu-btn:hover, .copy-btn:hover {
-      background: #00c2a8;
+      background: #e67300;
+      transform: scale(1.05);
     }
     .copy-btn {
       margin-left: 10px;
       font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .info-box {
+        padding: 20px;
+      }
     }
   </style>
 </head>
@@ -145,6 +163,7 @@
     </div>
   </div>
 
+  <!-- Script -->
   <script>
     function openSidebar() {
       document.getElementById("mySidebar").style.width = "250px";
@@ -152,6 +171,7 @@
     function closeSidebar() {
       document.getElementById("mySidebar").style.width = "0";
     }
+
     async function getServerStatus() {
       const serverIP = "play.hiver.my.id";
       try {
@@ -163,7 +183,6 @@
         document.getElementById("motd").innerHTML = data.motd?.clean?.join("<br>") || "Tidak tersedia";
         document.getElementById("versi").textContent = data.version || "Tidak tersedia";
         document.getElementById("online").textContent = `${data.players?.online || 0} / ${data.players?.max || 0}`;
-
       } catch (err) {
         document.getElementById("motd").textContent = "Gagal mengambil data server.";
       }
