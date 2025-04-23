@@ -6,172 +6,112 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
+      margin: 0;
+      padding: 0;
       font-family: 'Segoe UI', sans-serif;
       background: url('https://i.imgur.com/pxNqQvK.png') no-repeat center center fixed;
       background-size: cover;
-      margin: 0;
-      padding: 0;
-      color: #fff;
+      color: white;
     }
-
-    /* Sidebar */
-    .sidebar {
-      height: 100%;
-      width: 0;
-      position: fixed;
-      z-index: 1000;
-      top: 0;
-      left: 0;
-      background-color: #111;
-      overflow-x: hidden;
-      transition: 0.3s;
-      padding-top: 60px;
-    }
-    .sidebar a {
-      padding: 10px 25px;
-      text-decoration: none;
-      font-size: 18px;
-      color: #fff;
-      display: block;
-      border-bottom: 1px solid #333;
-    }
-    .sidebar a:hover {
-      background-color: #ff800020;
-    }
-    .sidebar .closebtn {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      font-size: 30px;
-      color: #ff5050;
-    }
-
-    /* Navbar */
-    .navbar {
-      background: #1b1b1b;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 0 10px #ff800080;
-    }
-    .menu-icon {
-      font-size: 28px;
-      cursor: pointer;
-      color: #ff8000;
-    }
-    .logo {
-      height: 45px;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-
-    /* Konten Utama */
     .main {
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 80vh;
-      padding: 30px 20px;
+      padding: 20px;
     }
-
     .info-box {
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.75);
       padding: 30px;
-      border-radius: 15px;
-      max-width: 500px;
+      border-radius: 20px;
+      max-width: 600px;
       width: 100%;
+      box-shadow: 0 0 20px #ff800080;
       text-align: center;
-      box-shadow: 0 0 15px #ff800080;
       animation: glow 2s ease-in-out infinite alternate;
     }
-
-    @keyframes glow {
-      from { box-shadow: 0 0 10px #ff800044, 0 0 20px #ff800022 inset; }
-      to { box-shadow: 0 0 20px #ff8000bb, 0 0 35px #ff800066 inset; }
-    }
-
     h1 {
+      font-size: 26px;
       color: #ff8000;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
     }
-
-    .info-box p {
+    p {
       font-size: 16px;
       margin: 12px 0;
     }
-
     .menu-btn, .copy-btn {
       display: inline-block;
-      padding: 10px 20px;
+      padding: 10px 22px;
       background: #ff8000;
       color: black;
+      font-weight: bold;
       border-radius: 8px;
       text-decoration: none;
-      font-weight: bold;
       box-shadow: 0 0 10px #ff800080;
-      margin-top: 15px;
+      margin-top: 20px;
       cursor: pointer;
-      transition: 0.3s ease;
+      transition: 0.3s;
     }
     .menu-btn:hover, .copy-btn:hover {
       background: #e67300;
       transform: scale(1.05);
     }
     .copy-btn {
-      margin-left: 10px;
       font-size: 14px;
+      margin-left: 10px;
     }
-
-    @media (max-width: 600px) {
-      .info-box {
-        padding: 20px;
-      }
+    table {
+      margin: 20px auto;
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      border: 1px solid #ff800033;
+      padding: 10px;
+      text-align: center;
+      color: #fff;
+    }
+    th {
+      background: #ff800020;
+      color: #ff8000;
+    }
+    @keyframes glow {
+      from { box-shadow: 0 0 10px #ff800055; }
+      to { box-shadow: 0 0 25px #ff8000aa; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Sidebar -->
-  <div id="mySidebar" class="sidebar">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">×</a>
-    <a href="index.html">🏠 Beranda</a>
-    <a href="toko.html">🛒 Toko</a>
-    <a href="kontak.html">📞 Kontak</a>
-    <a href="testimoni.html">📷 Testimoni</a>
-    <a href="join.html">💬 Join Grup</a>
-  </div>
-
-  <!-- Navbar -->
-  <div class="navbar">
-    <span class="menu-icon" onclick="openSidebar()">☰</span>
-    <img src="https://i.imgur.com/Mo8gSGN.png" class="logo" onclick="location.href='index.html'">
-  </div>
-
-  <!-- Konten -->
   <div class="main">
     <div class="info-box">
-      <h1>Info Server Minecraft</h1>
-      <p><strong>🌐 IP:</strong> <span id="ip">Loading...</span>
+      <h1>🌐 Info Server Minecraft</h1>
+      <p><strong>IP:</strong> <span id="ip">Loading...</span>
         <button class="copy-btn" onclick="copyIP()">Copy IP</button>
       </p>
-      <p><strong>📡 Port:</strong> <span id="port">Loading...</span></p>
-      <p><strong>📜 MOTD:</strong> <span id="motd">Loading...</span></p>
-      <p><strong>🧠 Versi:</strong> <span id="versi">Loading...</span></p>
-      <p><strong>👥 Pemain Online:</strong> <span id="online">Loading...</span></p>
-      <a href="https://chat.whatsapp.com/BlFb9ZxwK7kLOjWY5zcmP5" target="_blank" class="menu-btn">💬 Gabung Grup WhatsApp</a>
+      <p><strong>Port:</strong> <span id="port">Loading...</span></p>
+      <p><strong>MOTD:</strong> <span id="motd">Loading...</span></p>
+      <p><strong>Versi:</strong> <span id="versi">Loading...</span></p>
+      <p><strong>Pemain Online:</strong> <span id="online">Loading...</span></p>
+
+      <h2 style="color:#ff8000; margin-top: 30px;">🙇 Pemain Online Sekarang</h2>
+      <table id="player-table">
+        <thead>
+          <tr><th>No</th><th>Nama Pemain</th></tr>
+        </thead>
+        <tbody id="player-list">
+          <tr><td colspan="2">Loading...</td></tr>
+        </tbody>
+      </table>
+
+      <a class="menu-btn" href="https://chat.whatsapp.com/BlFb9ZxwK7kLOjWY5zcmP5" target="_blank">💬 Gabung Grup WhatsApp</a>
     </div>
   </div>
 
-  <!-- Script -->
   <script>
-    function openSidebar() {
-      document.getElementById("mySidebar").style.width = "250px";
-    }
-    function closeSidebar() {
-      document.getElementById("mySidebar").style.width = "0";
-    }
-
     async function getServerStatus() {
       const serverIP = "play.hiver.my.id";
       try {
@@ -183,8 +123,24 @@
         document.getElementById("motd").innerHTML = data.motd?.clean?.join("<br>") || "Tidak tersedia";
         document.getElementById("versi").textContent = data.version || "Tidak tersedia";
         document.getElementById("online").textContent = `${data.players?.online || 0} / ${data.players?.max || 0}`;
+
+        const playerList = data.players?.list || [];
+        const tbody = document.getElementById("player-list");
+        tbody.innerHTML = "";
+
+        if (playerList.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="2">Tidak ada pemain online</td></tr>';
+        } else {
+          playerList.forEach((pemain, index) => {
+            const nama = typeof pemain === "object" && pemain.name ? pemain.name : pemain;
+            const row = `<tr><td>${index + 1}</td><td>${nama}</td></tr>`;
+            tbody.innerHTML += row;
+          });
+        }
+
       } catch (err) {
         document.getElementById("motd").textContent = "Gagal mengambil data server.";
+        document.getElementById("player-list").innerHTML = '<tr><td colspan="2">Gagal memuat pemain</td></tr>';
       }
     }
 
