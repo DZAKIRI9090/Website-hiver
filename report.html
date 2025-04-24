@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Report - Hiver Roleplay</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://i.imgur.com/pxNqQvK.png') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      background-color: #111;
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+    }
+
+    .sidebar a {
+      padding: 10px 25px;
+      text-decoration: none;
+      font-size: 18px;
+      color: #fff;
+      display: block;
+      border-bottom: 1px solid #333;
+    }
+
+    .sidebar a:hover {
+      background-color: #ff800020;
+    }
+
+    .sidebar .closebtn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 30px;
+      color: #ff5050;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: #1b1b1b;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 0 10px #ff800080;
+    }
+
+    .menu-icon {
+      font-size: 28px;
+      cursor: pointer;
+      color: #ff8000;
+    }
+
+    .logo {
+      height: 45px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+
+    .form-box {
+      background: rgba(0, 0, 0, 0.75);
+      padding: 30px;
+      border-radius: 15px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 0 20px #ff800080;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    .form-box h1 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #ff8000;
+    }
+
+    label {
+      display: block;
+      margin: 12px 0 5px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      margin-bottom: 15px;
+      background: #333;
+      color: white;
+    }
+
+    input[type="file"] {
+      background: none;
+      padding-left: 0;
+    }
+
+    .menu-btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: #ff8000;
+      color: black;
+      border-radius: 8px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 0 10px #ff800080;
+    }
+
+    .menu-btn:hover {
+      background: #e67300;
+      transform: scale(1.05);
+    }
+
+    @keyframes glow {
+      from { box-shadow: 0 0 10px #ff800055; }
+      to { box-shadow: 0 0 25px #ff8000aa; }
+    }
+
+    .report-list {
+      margin-top: 40px;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .report-item {
+      background: rgba(0, 0, 0, 0.6);
+      border-left: 4px solid #ff8000;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      box-shadow: 0 0 10px #ff800080;
+    }
+
+    .report-item img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .form-box, .report-list {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">×</a>
+    <a href="index.html">🏠 Beranda</a>
+    <a href="toko.html">🛒 Toko</a>
+    <a href="kontak.html">📞 Kontak</a>
+    <a href="testimoni.html">📷 Testimoni</a>
+    <a href="join.html">💬 Join Grup</a>
+    <a href="report.html">🛡 Report</a>
+  </div>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <span class="menu-icon" onclick="openSidebar()">☰</span>
+    <img src="https://i.imgur.com/Mo8gSGN.png" class="logo" onclick="location.href='index.html'">
+  </div>
+
+  <!-- Konten Utama -->
+  <div class="main">
+    <div class="form-box">
+      <h1>🛡 Kirim Laporan</h1>
+      <form id="report-form">
+        <label for="bukti">Unggah Bukti (Gambar)</label>
+        <input type="file" id="bukti" accept="image/*" required>
+
+        <label for="pesan">Pesan</label>
+        <textarea id="pesan" rows="4" placeholder="Tuliskan pesan atau laporan..." required></textarea>
+
+        <button type="submit" class="menu-btn">Kirim Laporan</button>
+      </form>
+    </div>
+
+    <div class="report-list" id="report-list">
+      <!-- Laporan tampil di sini -->
+    </div>
+  </div>
+
+  <script>
+    function openSidebar() {
+      document.getElementById("mySidebar").style.width = "250px";
+    }
+
+    function closeSidebar() {
+      document.getElementById("mySidebar").style.width = "0";
+    }
+
+    document.getElementById("report-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const buktiInput = document.getElementById("bukti");
+      const pesan = document.getElementById("pesan").value;
+      const list = document.getElementById("report-list");
+
+      const file = buktiInput.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function () {
+        const item = document.createElement("div");
+        item.className = "report-item";
+        item.innerHTML = `<strong>Pesan:</strong><br>${pesan}<br><img src="${reader.result}" alt="Bukti" />`;
+        list.prepend(item);
+        document.getElementById("report-form").reset();
+      };
+      reader.readAsDataURL(file);
+    });
+  </script>
+</body>
+</html>
