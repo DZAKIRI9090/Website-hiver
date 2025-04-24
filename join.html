@@ -13,13 +13,73 @@
       background-size: cover;
       color: white;
     }
+
+    /* Sidebar */
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      background-color: #111;
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+    }
+
+    .sidebar a {
+      padding: 10px 25px;
+      text-decoration: none;
+      font-size: 18px;
+      color: #fff;
+      display: block;
+      border-bottom: 1px solid #333;
+    }
+
+    .sidebar a:hover {
+      background-color: #ff800020;
+    }
+
+    .sidebar .closebtn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 30px;
+      color: #ff5050;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: #1b1b1b;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 0 10px #ff800080;
+    }
+
+    .menu-icon {
+      font-size: 28px;
+      cursor: pointer;
+      color: #ff8000;
+    }
+
+    .logo {
+      height: 45px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    /* Konten Utama */
     .main {
-      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 20px;
+      min-height: 100vh;
+      padding: 30px 20px;
     }
+
     .info-box {
       background: rgba(0, 0, 0, 0.75);
       padding: 30px;
@@ -30,15 +90,23 @@
       text-align: center;
       animation: glow 2s ease-in-out infinite alternate;
     }
+
+    @keyframes glow {
+      from { box-shadow: 0 0 10px #ff800055; }
+      to { box-shadow: 0 0 25px #ff8000aa; }
+    }
+
     h1 {
       font-size: 26px;
       color: #ff8000;
       margin-bottom: 25px;
     }
+
     p {
       font-size: 16px;
       margin: 12px 0;
     }
+
     .menu-btn, .copy-btn {
       display: inline-block;
       padding: 10px 22px;
@@ -52,14 +120,17 @@
       cursor: pointer;
       transition: 0.3s;
     }
+
     .menu-btn:hover, .copy-btn:hover {
       background: #e67300;
       transform: scale(1.05);
     }
+
     .copy-btn {
       font-size: 14px;
       margin-left: 10px;
     }
+
     table {
       margin: 20px auto;
       width: 100%;
@@ -68,24 +139,46 @@
       border-radius: 8px;
       overflow: hidden;
     }
+
     th, td {
       border: 1px solid #ff800033;
       padding: 10px;
       text-align: center;
       color: #fff;
     }
+
     th {
       background: #ff800020;
       color: #ff8000;
     }
-    @keyframes glow {
-      from { box-shadow: 0 0 10px #ff800055; }
-      to { box-shadow: 0 0 25px #ff8000aa; }
+
+    @media (max-width: 600px) {
+      .info-box {
+        padding: 20px;
+      }
     }
   </style>
 </head>
 <body>
 
+  <!-- Sidebar -->
+  <div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">×</a>
+    <a href="index.html">🏠 Beranda</a>
+    <a href="toko.html">🛒 Toko</a>
+    <a href="kontak.html">📞 Kontak</a>
+    <a href="testimoni.html">📷 Testimoni</a>
+    <a href="join.html">💬 Join Grup</a>
+    <a href="report.html">🛡 Report</a>
+  </div>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <span class="menu-icon" onclick="openSidebar()">☰</span>
+    <img src="https://i.imgur.com/Mo8gSGN.png" class="logo" onclick="location.href='index.html'">
+  </div>
+
+  <!-- Konten -->
   <div class="main">
     <div class="info-box">
       <h1>🌐 Info Server Minecraft</h1>
@@ -111,7 +204,16 @@
     </div>
   </div>
 
+  <!-- Script -->
   <script>
+    function openSidebar() {
+      document.getElementById("mySidebar").style.width = "250px";
+    }
+
+    function closeSidebar() {
+      document.getElementById("mySidebar").style.width = "0";
+    }
+
     async function getServerStatus() {
       const serverIP = "play.hiver.my.id";
       try {
