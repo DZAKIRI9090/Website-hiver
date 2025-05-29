@@ -55,18 +55,74 @@
       justify-content: space-between;
       align-items: center;
       box-shadow: 0 0 8px #ff9800aa;
-    }
-
-    .menu-icon {
-      font-size: 28px;
-      cursor: pointer;
-      color: #ff9800;
+      flex-wrap: wrap;
     }
 
     .logo {
       height: 45px;
       border-radius: 10px;
       cursor: pointer;
+    }
+
+    .navbar-links {
+      display: none;
+      gap: 15px;
+      flex-grow: 1;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .navbar-links a {
+      color: #ff9800;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 12px;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+
+    .navbar-links a:hover {
+      background-color: #ff980022;
+    }
+
+    .menu-icon {
+      font-size: 28px;
+      cursor: pointer;
+      color: #ff9800;
+      margin-left: 10px;
+    }
+
+    .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .account-btn, .logout-btn {
+      color: #ff9800;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px;
+      border-radius: 5px;
+      transition: background 0.3s;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    .account-btn:hover, .logout-btn:hover {
+      background-color: #ff980022;
+    }
+
+    #user-email {
+      color: #ffcc80;
+      font-size: 14px;
+    }
+
+    @media (min-width: 768px) {
+      .sidebar { display: none; }
+      .menu-icon { display: none; }
+      .navbar-links { display: flex; }
     }
 
     .main {
@@ -145,36 +201,10 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
-    .navbar-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .account-btn, .logout-btn {
-      color: #ff9800;
-      text-decoration: none;
-      font-weight: bold;
-      padding: 10px;
-      border-radius: 5px;
-      transition: background 0.3s;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-    }
-
-    .account-btn:hover, .logout-btn:hover {
-      background-color: #ff980022;
-    }
-
-    #user-email {
-      color: #ffcc80;
-      font-size: 14px;
-    }
   </style>
 </head>
 <body>
+  <!-- Sidebar Mobile -->
   <div id="mySidebar" class="sidebar">
     <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">×</a>
     <a href="index.html">🏠 Beranda</a>
@@ -186,19 +216,30 @@
     <a href="musik.html">🎶 Musik</a>
   </div>
 
+  <!-- Navbar -->
   <div class="navbar">
     <div class="navbar-left">
-      <span class="menu-icon" onclick="openSidebar()">☰</span>
       <img src="https://i.imgur.com/Mo8gSGN.png" class="logo" onclick="location.href='index.html'" alt="Logo Hiver Roleplay">
+    </div>
+    <div class="navbar-links">
+      <a href="index.html">🏠 Beranda</a>
+      <a href="toko.html">🛒 Toko</a>
+      <a href="kontak.html">📞 Kontak</a>
+      <a href="testimoni.html">📷 Testimoni</a>
+      <a href="join.html">💬 Join Grup</a>
+      <a href="report.html">🛡 Report</a>
+      <a href="musik.html">🎶 Musik</a>
     </div>
     <div class="navbar-right">
       <span id="user-email"></span>
       <a href="akun.html" class="account-btn">👤 Akun</a>
       <a href="admin.html" class="account-btn" id="adminLink" style="display:none">🛠 Admin</a>
       <button class="logout-btn" id="logoutBtn" style="display:none">🔓 Logout</button>
+      <span class="menu-icon" onclick="openSidebar()">☰</span>
     </div>
   </div>
 
+  <!-- Main Content -->
   <div class="main">
     <h1>Selamat Datang di Hiver Roleplay</h1>
     <p>Toko resmi pembelian Kit & Pack server Minecraft Hiver RP.</p>
@@ -211,6 +252,7 @@
     </div>
   </div>
 
+  <!-- Script -->
   <script type="module">
     function openSidebar() {
       document.getElementById("mySidebar").style.width = "250px";
