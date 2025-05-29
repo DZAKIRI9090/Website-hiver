@@ -262,7 +262,7 @@
         document.getElementById("port").textContent = data.port || "25565";
         document.getElementById("motd").innerHTML = data.motd?.clean?.join("<br>") || "Tidak tersedia";
         document.getElementById("versi").textContent = data.version || "Tidak tersedia";
-        document.getElementById('serverSoftware').innerText = data.software || '-';
+        document.getElementById('serverSoftware').innerText = data.software || "-";
         document.getElementById("online").textContent = `${data.players?.online || 0} / ${data.players?.max || 0}`;
 
         const playerList = data.players?.list || [];
