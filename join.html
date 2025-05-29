@@ -71,6 +71,7 @@
       cursor: pointer;
     }
 
+    /* Konten Utama */
     .main {
       display: flex;
       justify-content: center;
@@ -130,23 +131,6 @@
       margin-left: 10px;
     }
 
-    .status-indicator {
-      font-weight: bold;
-      padding: 6px 12px;
-      border-radius: 10px;
-      display: inline-block;
-    }
-
-    .online {
-      background: #00cc66;
-      color: black;
-    }
-
-    .offline {
-      background: #cc0000;
-      color: white;
-    }
-
     table {
       margin: 20px auto;
       width: 100%;
@@ -199,21 +183,13 @@
   <div class="main">
     <div class="info-box">
       <h1>🌐 Info Server Minecraft</h1>
-      <p>Status Server: <span id="status" class="status-indicator">Loading...</span></p>
-      <p>
-        <strong>IP:</strong> <span id="ip">Loading...</span>
-        <button class="copy-btn" onclick="copyText('ip')">Copy IP</button>
+      <p><strong>IP:</strong> <span id="ip">Loading...</span>
+        <button class="copy-btn" onclick="copyIP()">Copy IP</button>
       </p>
-      <p>
-        <strong>Port:</strong> <span id="port">Loading...</span>
-        <button class="copy-btn" onclick="copyText('port')">Copy Port</button>
-      </p>
+      <p><strong>Port:</strong> <span id="port">Loading...</span></p>
       <p><strong>MOTD:</strong> <span id="motd">Loading...</span></p>
       <p><strong>Versi:</strong> <span id="versi">Loading...</span></p>
       <p><strong>Pemain Online:</strong> <span id="online">Loading...</span></p>
-      <p style="color: #ccc; font-size: 14px; margin-top: 5px;">
-        💡 Pemain Minecraft Java dan MCPE (Bedrock) juga bisa join!
-      </p>
 
       <h2 style="color:#ff8000; margin-top: 30px;">🙇 Pemain Online Sekarang</h2>
       <table id="player-table">
@@ -239,31 +215,18 @@
       document.getElementById("mySidebar").style.width = "0";
     }
 
-    function copyText(id) {
-      const text = document.getElementById(id).textContent;
-      navigator.clipboard.writeText(text).then(() => {
-        alert("✅ Disalin: " + text);
-      });
-    }
-
     async function getServerStatus() {
       const serverIP = "play.hiver.my.id";
-      const statusEl = document.getElementById("status");
       try {
         const res = await fetch(`https://api.mcsrvstat.us/3/${serverIP}`);
         const data = await res.json();
 
-        const online = data.online;
-
-        statusEl.textContent = online ? "Online" : "Offline";
-        statusEl.className = "status-indicator " + (online ? "online" : "offline");
-
-        document.getElementById("ip").textContent = data.hostname || serverIP;
-        document.getElementById("port").textContent = data.port || "25565";
-        document.getElementById("motd").innerHTML = data.motd?.clean?.join("<br>") || "Tidak tersedia";
-        document.getElementById("versi").textContent = data.version || "Tidak tersedia";
-        document.getElementById('serverSoftware').innerText = data.software || "-";
-        document.getElementById("online").textContent = `${data.players?.online || 0} / ${data.players?.max || 0}`;
+        document.getElementById("Ip").textContent = data.hostname || serverIP;
+        document.getElementById("Port").textContent = data.port || "25565";
+        document.getElementById("Motd").innerHTML = data.motd?.clean?.join("<br>") || "Tidak tersedia";
+        document.getElementById("Version").textContent = data.version || "Tidak tersedia";
+        document.getElementById("Software").textContent = data.software || "Tidak tersedia";
+        document.getElementById("Online").textContent = `${data.players?.online || 0} / ${data.players?.max || 0}`;
 
         const playerList = data.players?.list || [];
         const tbody = document.getElementById("player-list");
@@ -280,15 +243,18 @@
         }
 
       } catch (err) {
-        statusEl.textContent = "Gagal";
-        statusEl.className = "status-indicator offline";
         document.getElementById("motd").textContent = "Gagal mengambil data server.";
         document.getElementById("player-list").innerHTML = '<tr><td colspan="2">Gagal memuat pemain</td></tr>';
       }
     }
 
-    // Auto refresh tiap 60 detik
-    setInterval(getServerStatus, 60000);
+    function copyIP() {
+      const ip = document.getElementById("ip").textContent;
+      navigator.clipboard.writeText(ip).then(() => {
+        alert("✅ IP berhasil disalin ke clipboard!");
+      });
+    }
+
     getServerStatus();
   </script>
 </body>
