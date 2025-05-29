@@ -192,7 +192,7 @@
       <p><strong>MOTD:</strong> <span id="Motd">Loading...</span></p>
       <p><strong>Version:</strong> <span id="Version">Loading...</span></p>
       <p><strong>Software:</strong> <span id="Software">Loading...</span></p>
-      <p><strong>Pemain Online:</strong> <span id="online">Loading...</span></p>
+      <p><strong>Pemain Online:</strong> <span id="Online">Loading...</span></p>
 
       <h2 style="color:#ff8000; margin-top: 30px;">🙇 Pemain Online Sekarang</h2>
       <table id="player-table">
@@ -252,8 +252,8 @@
     }
 
     function copyIP() {
-      const ip = document.getElementById("ip").textContent;
-      navigator.clipboard.writeText(ip).then(() => {
+      const Ip = document.getElementById("Ip").textContent;
+      navigator.clipboard.writeText(Ip).then(() => {
         alert("✅ IP berhasil disalin ke clipboard!");
       });
     }
